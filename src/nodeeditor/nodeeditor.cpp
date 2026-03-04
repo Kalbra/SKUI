@@ -7,7 +7,7 @@ NodeEditor::NodeEditor(QWidget *parent)
 
     m_scene = new NodeEditorScene(parent);
     setScene(m_scene);
-    setSceneRect(0, 0, 1000, 1000);
+    setSceneRect(0, 0, 3000, 1000);
     centerOn(0, 0);
 
     //setDragMode(DragMode::ScrollHandDrag);

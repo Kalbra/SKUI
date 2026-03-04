@@ -32,6 +32,7 @@ void ResizeBoundingBox::paintEvent(QPaintEvent *event)
     }
 
     // Debug: Show hitboxes (yellow) and geometry (red) of widget
+    /*
     for (const QRect hitbox : hitboxes()) {
         painter.setPen(Qt::yellow);
         painter.drawRect(mapRectFromParent(hitbox));
@@ -42,7 +43,7 @@ void ResizeBoundingBox::paintEvent(QPaintEvent *event)
               geometry().size()
                   + QSize(-1,
                           -1) // Shiriking size by 1, so that the the Rect will render inside the widget
-              ));
+              ));*/
 }
 
 QRect ResizeBoundingBox::mapRectFromParent(QRect geometry)

@@ -23,11 +23,21 @@ public:
 signals:
     void changedInterfaceValue(const Interface &);
 
+protected:
+    /** @brief Set various configurations
+     * 
+     * This method sets the object name of instance.
+     * It contains the class name and an instance counter.
+     * The method also logs the creation of the object.
+     */
+    void config();
+
 private:
     QString m_name;
     QWidget *m_nodeeditor = nullptr;
 
     QList<Interface> m_interfaces;
+    static QMap<QString, int> instance_counter;
 };
 
 #endif // NODE_H

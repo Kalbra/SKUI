@@ -19,7 +19,7 @@ static const QColor INNER_COLOR = QColorConstants::Svg::mistyrose;
 static const int BOX_WIDTH = 2;
 static const int FONT_SIZE = 15; // points
 //static const int PAD_SIZE = 5;
-static const int PAD_SPACING = 10;
+static const int PAD_SPACING = 20;
 
 class NodeGraphicsItem : public QGraphicsItem
 {
@@ -31,6 +31,15 @@ public:
     void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
     QRectF boundingRect() const override;
     int type() const override { return Type; }
+
+    /** @brief Gets the node represented by the graphicsitem
+     * 
+     * This method gets the node that the NodeGrpahicsItem represents.
+     * 
+     * @return Pointer to the node
+     * @see Node::Node
+     */
+    inline const Node *getNode() { return m_node; }
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;

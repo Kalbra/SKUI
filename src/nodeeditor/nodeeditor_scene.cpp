@@ -10,7 +10,7 @@ NodeEditorScene::NodeEditorScene(QObject *parent)
 void NodeEditorScene::addNode(Node *node)
 {
     m_nodes.append(node);
-    m_debug_x = m_debug_x + 300;
+    m_debug_x = m_debug_x + 200;
     NodeGraphicsItem *node_graphicitem = new NodeGraphicsItem(nullptr, node);
     node_graphicitem->setPos(m_debug_x, 100);
     addItem(node_graphicitem);
@@ -36,11 +36,18 @@ void NodeEditorScene::handlePadTrigger(Pad *pad)
         bool different_sides = m_initial_pad->getSide() != pad->getSide();
         if (different_sides) {
             m_active_cable->corner(pad->getSceneDockPoint());
+            connectPads(m_initial_pad, pad);
             disableCableConnectionState();
         }
     } else {
         enableCableConnectionState(pad);
     }
+}
+
+void NodeEditorScene::connectPads(Pad *first, Pad *second)
+{
+    qDebug() << "Routing init" << first << second->getInterface();
+    first->getInterface()->routeTo(second->getInterface());
 }
 
 void NodeEditorScene::handleCornerTrigger(QPoint corner_pos)

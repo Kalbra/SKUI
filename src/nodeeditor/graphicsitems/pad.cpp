@@ -1,7 +1,8 @@
 #include "pad.h"
 
-Pad::Pad(QGraphicsItem *parent, PadSide pad_side)
+Pad::Pad(QGraphicsItem *parent, Interface *interface, PadSide pad_side)
     : QGraphicsItem{parent}
+    , m_represented_interface(interface)
     , m_pad_side(pad_side)
 {
     setAcceptHoverEvents(true);
@@ -61,9 +62,9 @@ void Pad::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidg
     }
 
     //Debug, draw the bouding Rect
-    painter->setPen(QPen(Qt::red, 1));
-    painter->setBrush(QBrush());
-    painter->drawRect(boundingRect());
+    //painter->setPen(QPen(Qt::red, 1));
+    //painter->setBrush(QBrush());
+    //painter->drawRect(boundingRect());
 }
 
 QRectF Pad::boundingRect() const

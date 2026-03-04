@@ -26,19 +26,21 @@ void NodeGraphicsItem::createPads(QRect frame_geometry)
     int left_y_offset = PAD_SPACING;
     int right_y_offset = PAD_SPACING;
 
-    for (const Interface &interface : m_node->getInterfaces()) {
+    for (Interface &interface : m_node->getInterfaces()) {
         if (interface.getDirection() == InterfaceDirection::Input) {
-            Pad *pad = new Pad(this, PadSide::Left);
+            Pad *pad = new Pad(this, &interface, PadSide::Left);
             int x_pos = frame_geometry.left() - pad->boundingRect().width() + BOX_WIDTH;
             pad->setPos(x_pos, left_y_offset);
             left_y_offset += PAD_SPACING;
         } else if (interface.getDirection() == InterfaceDirection::Output) {
-            Pad *pad = new Pad(this, PadSide::Right);
+            Pad *pad = new Pad(this, &interface, PadSide::Right);
             int x_pos = frame_geometry.right() + BOX_WIDTH * 2;
             pad->setPos(x_pos, right_y_offset);
             right_y_offset += PAD_SPACING;
         }
     }
+
+    m_frame_geometry.setHeight(std::max(left_y_offset, right_y_offset));
 }
 
 void NodeGraphicsItem::paint(QPainter *painter,
@@ -55,9 +57,9 @@ void NodeGraphicsItem::paint(QPainter *painter,
     drawOuterFrame(painter);
 
     //Debug, draw name bounding
-    painter->setPen(Qt::red);
-    painter->setBrush(QBrush());
-    painter->drawRect(m_frame_geometry);
+    //painter->setPen(Qt::red);
+    //painter->setBrush(QBrush());
+    //painter->drawRect(m_frame_geometry);
 }
 
 void NodeGraphicsItem::drawOuterFrame(QPainter *painter)

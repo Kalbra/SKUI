@@ -3,7 +3,6 @@
 Q_DECLARE_LOGGING_CATEGORY(visual)
 Q_LOGGING_CATEGORY(visual, "VISUAL")
 
-QMap<QString, int> Visual::instance_counter;
 
 Visual::Visual(QObject *parent)
     : Node(parent)
@@ -31,16 +30,3 @@ QWidget *Visual::paintWidget(VisualContainer *visual_container)
     return widget;
 }
 
-void Visual::config()
-{
-    QString class_name = metaObject()->className();
-    // Needed because every dirived class should have their own counter.
-    // Using only a static counter whould share between the different dirived classes.
-    instance_counter[class_name]++;
-
-    // Example: "Label 1"
-    QString instance_name = class_name + " " + QString::number(instance_counter[class_name]);
-    setObjectName(instance_name);
-
-    qDebug(visual) << "Created Viusal <" << instance_name << ">";
-}

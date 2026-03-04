@@ -32,6 +32,7 @@ protected:
 
 private:
     void handlePadTrigger(Pad *);
+    void connectPads(Pad *first, Pad *second);
     void handleCornerTrigger(QPoint corner_pos);
     void disableCableConnectionState();
     void enableCableConnectionState(Pad *);

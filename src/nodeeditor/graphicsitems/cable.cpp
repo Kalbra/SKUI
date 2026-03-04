@@ -9,7 +9,6 @@ Cable::Cable(QGraphicsItem *parent, QPoint initial_point)
 
 void Cable::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    qDebug() << m_corner;
     painter->setPen(Qt::red);
     painter->drawRect(boundingRect());
 
@@ -33,7 +32,7 @@ void Cable::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 
 QRectF Cable::boundingRect() const
 {
-    return QRectF(0, 0, 1000, 1000);
+    return QRectF(0, 0, 3000, 3000);
 }
 
 void Cable::previewCable(QPoint point)

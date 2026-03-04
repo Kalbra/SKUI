@@ -9,7 +9,7 @@ enum class InterfaceDirection { Output, Input };
 class Interface : public QVariant
 {
 public:
-    Interface(QVariant &&, InterfaceDirection, const QString &);
+    Interface(QVariant &&, InterfaceDirection, QString);
 
     QString &getIdentifier() { return m_identifier; };
     const InterfaceDirection &getDirection() const { return m_interface_direction; };

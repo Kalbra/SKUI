@@ -6,6 +6,8 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
 
+#include "../../node/interface.h"
+
 static const int LINE_WIDTH = 3;
 static const int PAD_SIZE = 10;
 static const int PAD_EXPANDED = 12;
@@ -18,7 +20,9 @@ class Pad : public QGraphicsItem
 public:
     static const int Type = QGraphicsItem::UserType + 1;
 
-    explicit Pad(QGraphicsItem *parent = nullptr, const PadSide pad_side = PadSide::Left);
+    explicit Pad(QGraphicsItem *parent = nullptr,
+                 Interface *interface = nullptr,
+                 const PadSide pad_side = PadSide::Left);
 
     /** @brief Get position for the cable to dock to
      * 
@@ -43,7 +47,7 @@ public:
     void setHover(bool hover);
 
     inline PadSide getSide() const { return m_pad_side; }
-
+    inline Interface *getInterface() const { return m_represented_interface; }
     void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
     QRectF boundingRect() const override;
     int type() const override { return Type; }
@@ -54,6 +58,7 @@ protected:
 private:
     bool m_hover = false;
     const PadSide m_pad_side;
+    Interface *m_represented_interface;
 };
 
 #endif // PAD_H

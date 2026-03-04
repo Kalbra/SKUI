@@ -1,21 +1,22 @@
 #include "interface.h"
 
-Interface::Interface(QVariant &&value,
-                     InterfaceDirection interface_direction,
-                     const QString &identifier)
+Interface::Interface(QVariant &&value, InterfaceDirection interface_direction, QString identifier)
     : QVariant(value)
     , m_interface_direction(interface_direction)
     , m_identifier(identifier)
-{}
+{
+    qDebug() << m_identifier;
+}
 
 bool Interface::routeTo(Interface *target_interface)
 {
     if (m_interface_direction == InterfaceDirection::Input) {
         return false; // Failed: Routing is done by output interfaces
     }
-    if (this->typeId() != target_interface->typeId()) {
-        return false; // Failed: Interfaces not same type
-    }
+    qDebug() << m_identifier;
+    //if (this->typeId() != target_interface->typeId()) {
+    //    return false; // Failed: Interfaces not same type
+    //}
 
     qDebug() << "Routing from Interface:" << m_identifier
              << "to Interface:" << target_interface->m_identifier;
@@ -42,8 +43,8 @@ void Interface::update()
 void Interface::updateRoutedInterfaces()
 {
     for (Interface *routed_interface : m_routed_interfaces) {
-        routed_interface->update();
         routed_interface->setValue(*static_cast<QVariant *>(this));
+        routed_interface->update();
     }
 }
 

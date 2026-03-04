@@ -1,9 +1,10 @@
 #include "node.h"
 
+QMap<QString, int> Node::instance_counter;
+
 Node::Node(QObject *parent)
     : QObject{parent}
 {}
-
 
 Interface *Node::getInterface(const QString &identifier)
 {
@@ -14,4 +15,18 @@ Interface *Node::getInterface(const QString &identifier)
     }
 
     return nullptr; // No interface found with the given identifier
+}
+
+void Node::config()
+{
+    QString class_name = metaObject()->className();
+    // Needed because every dirived class should have their own counter.
+    // Using only a static counter whould share between the different dirived classes.
+    instance_counter[class_name]++;
+
+    // Example: "Label 1"
+    QString instance_name = class_name + " " + QString::number(instance_counter[class_name]);
+    setObjectName(instance_name);
+
+    qDebug() << "Created Viusal <" << instance_name << ">";
 }

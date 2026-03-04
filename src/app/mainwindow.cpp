@@ -10,6 +10,13 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    setWindowTitle("SKUI");
+
+    QPixmap icon;
+    icon.fill(QColor("#FF1FA9"));
+
+    setWindowIcon(QIcon(icon));
+
     panel = new Panel;
     ui->tabWidget->addTab(panel, "Panel");
 
@@ -25,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
     loadAlignTools();
 
     connect(this, &MainWindow::modeChanged, panel, &Panel::setMode);
-    focus_document->createVisual(VisualType::Slider);
+    //focus_document->createVisual(VisualType::Slider);
 }
 
 MainWindow::~MainWindow()
@@ -35,8 +42,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::loadInsertVisualMenu()
 {
-    const VisualMenuAction wrapped_actions[] = {{"Test", VisualType::Test},
-                                                {"Slider", VisualType::Slider}};
+    const VisualMenuAction wrapped_actions[] = {
+        {"Label", VisualType::Test},
+        {"Slider", VisualType::Slider},
+        {"SerialSend", VisualType::SerialSend},
+        {"LineEdit", VisualType::LineEdit},
+        {"TextCombine", VisualType::TextCombine},
+    };
 
     for (const VisualMenuAction &wraped_action : wrapped_actions) {
         QAction *menu_insert_action = new QAction(wraped_action.name);
