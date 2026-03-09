@@ -1,0 +1,67 @@
+name: Bug Report
+about: File a bug report
+title: "[BR]: <Plausable title here>"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report 🤟
+
+  - type: checkboxes
+    attributes:
+      label: Checklist
+      description: The following condition must be true to submit your report.
+      options:
+        - label: The bug occures in the latest version
+          required: true
+        - label: I have checked if someone reported the bug already
+          required: true
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: | 
+        Also tell us, what did you expect to happen? Provide Screenshots if possible.
+      placeholder: | 
+        E.g. Once I move an Visual at the Panel via the mouse, the location offsets more and more.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: | 
+        What steps need to be taken, so that the bug occurs for the developer?
+      placeholder: |
+        E.g - Open a Panel 
+        - Insert a Visual 
+        - Change to Edit mode
+        - Select a Visual via click or Rubber Band
+        - Move the Visual around
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    label: What Operation System did you use?
+    placeholder: E.g. Microsoft Windows 11 Pro
+    validations:
+      required: true
+
+  - type: input
+    id: os-version
+    label: Which specific version / build of the OS did you use?
+    placeholder: E.g. 10.0.26200 Build 26200
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output.
+      render: shell
