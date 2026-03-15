@@ -26,8 +26,8 @@ jobs:
         with:
           version: ${{ matrix.qt_version }}
           target: desktop
-          # cache: true # Optional: Setup caching for faster builds
-          # modules: 'qtcharts qtwebengine' # Optional: Add specific Qt modules here if needed
+          cache: 'pip'
+          modules: 'qtserialport qtwebengine'
 
       - name: Install Linux Dependencies
         if: runner.os == 'Linux'
