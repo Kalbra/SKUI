@@ -26,8 +26,7 @@ jobs:
         with:
           version: ${{ matrix.qt_version }}
           target: desktop
-          cache: 'pip'
-          modules: 'qtserialport qtwebengine'
+          modules: 'qtserialport'
 
       - name: Install Linux Dependencies
         if: runner.os == 'Linux'
