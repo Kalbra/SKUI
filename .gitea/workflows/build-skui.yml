@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest] # insert to os when runners are setup: windows-latest, macos-latest
         qt_version: [6.9.0]
         
     steps:
