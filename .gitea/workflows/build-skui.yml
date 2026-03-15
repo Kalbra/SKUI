@@ -8,6 +8,8 @@ jobs:
   build:
     name: Build on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    env:
+      RUNNER_TOOL_CACHE: /tmp/toolcache
     strategy:
       fail-fast: false
       matrix:
@@ -27,6 +29,7 @@ jobs:
           version: ${{ matrix.qt_version }}
           target: desktop
           setup-python: 'false'
+          cache: 'true'
           modules: 'qtserialport'
 
       - name: Install Linux Dependencies
