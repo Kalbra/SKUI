@@ -43,9 +43,9 @@ jobs:
       - name: Configure CMake
         shell: bash
         run: |
-          cmake -S '${{ github.workspace }}' -B '${{ github.workspace }}/src/build' -DCMAKE_BUILD_TYPE=Release
+          cmake -S '${{ gitea.workspace }}' -B '${{ gitea.workspace }}/src/build' -DCMAKE_BUILD_TYPE=Release
 
       - name: Build
         shell: bash
         run: |
-          cmake --build '${{ github.workspace }}/src/build' --config Release
+          cmake --build '${{ gitea.workspace }}/src/build' --config Release
