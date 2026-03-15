@@ -4,7 +4,6 @@ Node::Node(QObject *parent)
     : QObject{parent}
 {}
 
-
 Interface *Node::getInterface(const QString &identifier)
 {
     for (Interface &interface : m_interfaces) {

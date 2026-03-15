@@ -4,8 +4,8 @@
 #include <QFormLayout>
 #include <QLabel>
 #include <QMetaProperty>
-#include <QWidget>
 #include <QScrollArea>
+#include <QWidget>
 
 class PropertyWindow : public QWidget
 {
