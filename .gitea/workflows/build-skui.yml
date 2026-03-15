@@ -24,11 +24,6 @@ jobs:
           submodules: 'recursive'   # fetch submodules recursively
           fetch-depth: 0            # fetch full history (needed for some submodule workflows)
         
-      - name: Install Build Tools
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y cmake build-essential
-
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
@@ -43,7 +38,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential libgl1-mesa-dev ninja-build libxkbcommon-x11-0 libvulkan1
+          sudo apt-get install -y build-essential cmake libgl1-mesa-dev ninja-build libxkbcommon-x11-0 libvulkan1
 
       - name: Configure CMake
         shell: bash
