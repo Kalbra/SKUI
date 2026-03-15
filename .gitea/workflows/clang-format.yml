@@ -1,13 +1,22 @@
-name: Clang-format check
-on: pull_request
 jobs:
   formatting-check:
     name: Formatting Check
     runs-on: ubuntu-latest
+    
+    env:
+      PIP_BREAK_SYSTEM_PACKAGES: 1 
+
     steps:
-    - uses: actions/checkout@v4
-    - name: Run clang-format style check
-      uses: jidicula/clang-format-action@v4.16.0
-      with:
-        clang-format-version: '21'
-        check-path: '${{ github.workspace }}/src'
+      - uses: actions/checkout@v4
+
+      # 2. Install clang-format directly natively
+      - name: Install clang-format 21
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          pip3 install clang-format==21.1.1
+
+      # 3. Find all C++ files in /src and run the check
+      - name: Run clang-format style check
+        run: |
+          find '${{ github.workspace }}/src' -type f \( -name "*.cpp" -o -name "*.h" -o -name "*.hpp" -o -name "*.c" \) | xargs -r clang-format --dry-run --Werror
