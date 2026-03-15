@@ -26,6 +26,7 @@ jobs:
         with:
           version: ${{ matrix.qt_version }}
           target: desktop
+          setup-python: 'false'
           modules: 'qtserialport'
 
       - name: Install Linux Dependencies
