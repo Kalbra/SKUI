@@ -1,3 +1,9 @@
+name: Validate format using clang
+
+on:
+  pull_request:
+    branches: "main"
+
 jobs:
   formatting-check:
     name: Formatting Check
