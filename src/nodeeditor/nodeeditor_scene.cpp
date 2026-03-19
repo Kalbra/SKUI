@@ -43,6 +43,13 @@ void NodeEditorScene::handlePadTrigger(Pad *pad)
         enableCableConnectionState(pad);
     }
 }
+void NodeEditorScene::handlePadHover(Pad *pad)
+{
+    pad->setHover(true);
+    if (isCableConnectionState()) {
+        m_active_cable->previewCable(pad->getSceneDockPoint());
+    }
+}
 
 void NodeEditorScene::connectPads(Pad *first, Pad *second)
 {
@@ -54,6 +61,15 @@ void NodeEditorScene::handleCornerTrigger(QPoint corner_pos)
 {
     if (m_active_cable) {
         m_active_cable->corner(corner_pos);
+    }
+}
+
+void NodeEditorScene::removePadHoverStates()
+{
+    for (QGraphicsItem *item : items()) {
+        if (Pad *pad = qgraphicsitem_cast<Pad *>(item)) {
+            pad->setHover(false);
+        }
     }
 }
 
@@ -81,27 +97,18 @@ void NodeEditorScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     QPointF scene_pos = event->scenePos();
     QList<QGraphicsItem *> items_at_pos = items(scene_pos);
 
+    // Set all pads to no hover as it is the default value
+    removePadHoverStates();
+
+    bool mouse_on_pad = false;
     for (QGraphicsItem *item : items_at_pos) {
         if (Pad *pad = qgraphicsitem_cast<Pad *>(item)) {
-            pad->setHover(true);
-            for (QGraphicsItem *other : items_at_pos) {
-                if (Pad *other_pad = qgraphicsitem_cast<Pad *>(other)) {
-                    if (other_pad != pad) {
-                        other_pad->setHover(false);
-                    }
-                }
-            }
-            return;
+            mouse_on_pad = true;
+            handlePadHover(pad);
         }
     }
 
-    for (QGraphicsItem *item : items()) {
-        if (Pad *pad = qgraphicsitem_cast<Pad *>(item)) {
-            pad->setHover(false);
-        }
-    }
-
-    if (isCableConnectionState()) {
+    if (isCableConnectionState() && !mouse_on_pad) {
         m_active_cable->previewCable(event->scenePos().toPoint());
     }
 }

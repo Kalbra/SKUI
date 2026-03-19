@@ -6,6 +6,10 @@
 
 enum class DirectionalPlane { Horizontal, Vertical };
 
+struct CableSegment {
+    
+};
+
 class Cable : public QGraphicsItem
 {
 public:

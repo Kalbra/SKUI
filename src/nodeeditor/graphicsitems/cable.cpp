@@ -45,7 +45,6 @@ void Cable::corner(QPoint point)
 {
     std::pair<QPoint, QPoint> restriced_points = getRestrictedCablePath(m_corner.last(), point);
     m_corner.append(restriced_points.first);
-    m_corner.append(restriced_points.second);
     switchPlane();
     update();
 }
