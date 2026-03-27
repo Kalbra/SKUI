@@ -52,9 +52,6 @@ public:
     QRectF boundingRect() const override;
     int type() const override { return Type; }
 
-protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent *) override;
-
 private:
     bool m_hover = false;
     const PadSide m_pad_side;

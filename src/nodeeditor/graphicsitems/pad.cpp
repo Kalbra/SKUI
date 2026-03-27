@@ -74,13 +74,3 @@ QRectF Pad::boundingRect() const
                   PAD_EXPANDED + LINE_LENGTH + LINE_WIDTH * 2,
                   PAD_EXPANDED + LINE_WIDTH * 2);
 }
-
-void Pad::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-    if (event->button() == Qt::LeftButton) {
-        // Forewarding event, so that nodeeditor_scene can handle it
-        event->ignore();
-    } else {
-        QGraphicsItem::mousePressEvent(event);
-    }
-}
