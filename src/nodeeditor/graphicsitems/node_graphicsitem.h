@@ -15,6 +15,7 @@
 
 static const QMargins BOX_MARGIN(7, 7, 7, 7);
 static const QColor BOX_COLOR = QColorConstants::Svg::midnightblue;
+static const QColor BOX_COLOR_AT_SELECTION = Qt::red;
 static const QColor INNER_COLOR = QColorConstants::Svg::mistyrose;
 static const int BOX_WIDTH = 2;
 static const int FONT_SIZE = 15; // points
@@ -41,13 +42,6 @@ public:
      */
     inline const Node *getNode() { return m_node; }
 
-protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
-    void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
-    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
-    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
-
 private:
     void drawOuterFrame(QPainter *painter);
     void createPads(QRect frame_geometry);
@@ -57,8 +51,6 @@ private:
     QRect m_node_name_geometry;
     QFont m_font;
     QString m_object_name;
-    QPointF m_drag_start_pos;
-    bool m_is_dragging = false;
 };
 
 #endif // NODE_GRAPHICSITEM_H

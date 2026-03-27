@@ -2,13 +2,13 @@
 #define CABLE_H
 
 #include <QGraphicsItem>
+#include <QGraphicsSceneMouseEvent>
 #include <QPainter>
 
 enum class DirectionalPlane { Horizontal, Vertical };
 
-struct CableSegment {
-    
-};
+struct CableSegment
+{};
 
 class Cable : public QGraphicsItem
 {
@@ -56,7 +56,8 @@ public:
     QRectF boundingRect() const override;
 
 private:
-    const std::pair<QPoint, QPoint> getRestrictedCablePath(const QPoint &start_point, const QPoint &end_point);
+    const std::pair<QPoint, QPoint> getRestrictedCablePath(const QPoint &start_point,
+                                                           const QPoint &end_point);
     void switchPlane();
 
     QList<QPoint> m_corner;

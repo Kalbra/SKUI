@@ -3,6 +3,7 @@
 
 #include <QGraphicsScene>
 #include <QGuiApplication>
+#include <QLoggingCategory>
 
 #include "./graphicsitems/cable.h"
 #include "./graphicsitems/node_graphicsitem.h"
@@ -31,19 +32,19 @@ protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *) override;
 
 private:
-    void handlePadTrigger(Pad *);
-    void handlePadHover(Pad *);
     void connectPads(Pad *first, Pad *second);
     void handleCornerTrigger(QPoint corner_pos);
     void disableCableConnectionState();
     void enableCableConnectionState(Pad *);
     void removePadHoverStates();
+    Pad *getPad(QPointF position); // Can be nullptr
+    void finishCableConnection(Pad *pad);
 
     int m_debug_x = 0;
     QList<Node *> m_nodes;
     QCursor m_cursor_before_pad;
 
-    // nullptr if there if on initital pad yet
+    // nullptr because there is no initital pad yet
     Pad *m_initial_pad = nullptr;
     Cable *m_active_cable = nullptr;
 };

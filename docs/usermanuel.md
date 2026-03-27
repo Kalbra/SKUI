@@ -24,12 +24,12 @@ By this you create *Logic Paths* from one *Node* to another. One of the easies e
 First you create two *Visual* *Nodes*. One Slider and One Progress Bar. By conecting the *Output* of the Slider *Node* and the *Input* of the Progress Bar *Node* you get a *Connection*.
 Every time you *Control* or in more non Skui words change the Slider, so will the Progress Bar.
 
-### Panel
+### The Panel
 The *Panel* is the main panel to control. It is not used for linking your Nodes. You can use the *Node Editor* for that.
 The *Panel* contains *Visuals* 
 
-### Edit Mode
-Edit mode is the mode to change your *Visuals*. You can configure them as you like.
+#### Working with Edit Mode
+Edit mode is the mode to change your *Visuals* at the *Panel*. You can configure them as you like.
 
 You can select an *Viusal* by clicking on it. A bounding box pop's up. It is now possible to drag 
 or resize the *Visual*.
@@ -38,4 +38,23 @@ If you want to select multible *Visuals* you can either press the mouse and drag
 and click on the *Visuals* you want to select.
 
 **GIF ANIMATION**
+
+### The Node Editor
+You might have defined and set up some *Visuals* at the *Panel*. But there is a big problem ...
+they are dead inside, have no soul or to use more rational terminology, they lack logic.
+To define logic, you have the *Node Editor*. You can *Connect* different *Nodes*.
+
+#### The behaviour of the Editor
+You can insert *Nodes* by right clicking and selection the *Node* you want to insert.
+It will spawn at the positon where you right clicked. 
+If you are right clicking while you are *Routing* a *Cable*. 
+The spawned *Node* will be automaticlly connected to the active *Cable*.
+
+By left clicking on a *Pad* a new *Cable* be created. *Cables* can only go vertical or horizontal.
+If you have your *Cable* active after initiating it at a *Pad*. You can left click again to switch direction.
+
+By a left click on a *Node* you can select the Node, hold Shift to select more. 
+You can hold left to move the selected *Node*/*Nodes* or press Delete to delete them.
+
+
 

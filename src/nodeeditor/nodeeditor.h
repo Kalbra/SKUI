@@ -2,6 +2,8 @@
 #define NodeEditor_H
 
 #include <QGraphicsView>
+#include <QLoggingCategory>
+#include <QMouseEvent>
 
 #include "../node/node.h"
 #include "nodeeditor_scene.h"
@@ -14,8 +16,17 @@ public:
 
     void addNode(Node *);
 
+protected:
+    void mousePressEvent(QMouseEvent *) override;
+    void mouseMoveEvent(QMouseEvent *) override;
+    void mouseReleaseEvent(QMouseEvent *) override;
+
 private:
+    void selectOrDrag(NodeGraphicsItem *node, QPoint current_pos);
     NodeEditorScene *m_scene;
+
+    bool m_dragging = false;
+    QPoint m_last_drag_pos;
 };
 
 #endif // NodeEditor_H

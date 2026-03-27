@@ -5,6 +5,7 @@ Cable::Cable(QGraphicsItem *parent, QPoint initial_point)
 {
     m_current_preview_points = {initial_point, initial_point};
     m_corner.append(initial_point);
+    setAcceptedMouseButtons(Qt::NoButton);
 }
 
 void Cable::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

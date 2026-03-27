@@ -6,7 +6,8 @@ NodeGraphicsItem::NodeGraphicsItem(QGraphicsItem *parent, Node *node)
     , m_node(node)
 {
     setAcceptHoverEvents(true);
-    setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemSendsGeometryChanges);
+    setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemSendsGeometryChanges
+             | QGraphicsItem::ItemIsSelectable);
 
     QFont font = QFont();
     font.setBold(true);
@@ -47,8 +48,15 @@ void NodeGraphicsItem::paint(QPainter *painter,
                              const QStyleOptionGraphicsItem *option,
                              QWidget *widget)
 {
+    QColor used_box_color;
+    if (isSelected()) {
+        used_box_color = BOX_COLOR_AT_SELECTION;
+    } else { // Normal case, no selection
+        used_box_color = BOX_COLOR;
+    }
+
     painter->setFont(m_font);
-    QPen pen(BOX_COLOR, BOX_WIDTH);
+    QPen pen(used_box_color, BOX_WIDTH);
     painter->setPen(pen);
 
     QBrush brush(INNER_COLOR);
@@ -71,79 +79,7 @@ void NodeGraphicsItem::drawOuterFrame(QPainter *painter)
                       m_object_name);
 }
 
-void NodeGraphicsItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-    if (event->button() == Qt::LeftButton) {
-        m_drag_start_pos = event->pos();
-        m_is_dragging = true;
-        event->accept();
-    } else {
-        QGraphicsItem::mousePressEvent(event);
-    }
-}
-
-void NodeGraphicsItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
-{
-    if (!m_is_dragging) {
-        QGraphicsItem::mouseMoveEvent(event);
-        return;
-    }
-
-    QPointF mouse_offset = event->pos() - m_drag_start_pos;
-    QPointF new_pos = pos() + mouse_offset;
-
-    setPos(new_pos);
-    event->accept();
-}
-
-void NodeGraphicsItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-{
-    if (event->button() == Qt::LeftButton && m_is_dragging) {
-        m_is_dragging = false;
-        event->accept();
-    } else {
-        QGraphicsItem::mouseReleaseEvent(event);
-    }
-}
-
-void NodeGraphicsItem::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
-{
-    qDebug() << "NodeGraphicsItem hover enter" << event->scenePos()
-             << mapFromScene(event->scenePos());
-    QPointF local_pos = mapFromScene(event->scenePos());
-
-    for (QGraphicsItem *child : childItems()) {
-        if (Pad *pad = qgraphicsitem_cast<Pad *>(child)) {
-            QRectF pad_rect = pad->boundingRect();
-            QPointF pad_pos = pad->pos();
-            pad_rect.translate(pad_pos);
-            qDebug() << "Pad rect:" << pad_rect << "contains:" << pad_rect.contains(local_pos);
-            if (pad_rect.contains(local_pos)) {
-                pad->setHover(true);
-                return;
-            }
-        }
-    }
-    QGraphicsItem::hoverEnterEvent(event);
-}
-
-void NodeGraphicsItem::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
-{
-    for (QGraphicsItem *child : childItems()) {
-        if (Pad *pad = qgraphicsitem_cast<Pad *>(child)) {
-            pad->setHover(false);
-        }
-    }
-    QGraphicsItem::hoverLeaveEvent(event);
-}
-
 QRectF NodeGraphicsItem::boundingRect() const
 {
-    // Calculate actual bounds based on frame geometry and pad areas
-    qreal left = -PAD_SPACING; // Account for left pads
-    qreal top = 0;
-    qreal width = m_frame_geometry.width() + PAD_SPACING * 2; // Account for both pad areas
-    qreal height = m_frame_geometry.height();
-
-    return QRectF(left, top, width, height);
+    return m_frame_geometry;
 }
