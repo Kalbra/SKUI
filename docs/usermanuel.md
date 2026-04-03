@@ -1,7 +1,7 @@
 # User manual
 
 ## The Node
-A *Node* is a bock thats has inputs and outputs. These inputs or outputs are called *Interfaces*. 
+A *Node* is a block thats has inputs and outputs. These inputs or outputs are called *Interfaces*. 
 You can connect *Interfaces* via a *Cable*.
 A *Cable* routes an input *Interface* to an output *Interface*. It is a visual representation of the connected *Interfaces*.
 *Nodes* can be routed and configured via the *Node Editor*. 
@@ -10,6 +10,7 @@ A *Cable* routes an input *Interface* to an output *Interface*. It is a visual r
 
 ### Controlling vs. Configuring vs. Programming
 Normally these two words are near togehter, linguistically speaking. But in Skui they describe to fundamental differenct things.
+
 When you *Control* Skui, you run it and change things by controlling *Panels*. Each *Panel* has *Visuals* where the controlling happens. A *Visual* could be a Nob or a Slider.
 But also Graphs and Progess Bars are *Visuals*. Controling only works in *Run Mode*.
 
@@ -20,7 +21,7 @@ You might want to change the Baud Rate *Property* of a Serial *Driver* or the lo
 The *Configuration* is the initial state in that the program starts with. But what if I want change behaviour at runtime and implement logic?
 
 *Programming* is the right thing to do. It happens in the *Node Editor* where you *Connect* different *Nodes* to each other.
-By this you create *Logic Paths* from one *Node* to another. One of the easies exampeles for this is the connection between a Slider and a Progress Bar.
+By this you create *Logic Paths* from one *Node* to another. One of the easiest examples for this is the connection between a Slider and a Progress Bar.
 First you create two *Visual* *Nodes*. One Slider and One Progress Bar. By conecting the *Output* of the Slider *Node* and the *Input* of the Progress Bar *Node* you get a *Connection*.
 Every time you *Control* or in more non Skui words change the Slider, so will the Progress Bar.
 
