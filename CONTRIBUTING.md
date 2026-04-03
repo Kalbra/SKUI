@@ -35,7 +35,7 @@ details about how this project handles them.
 Most projects suggest to start by editing the documenation to get into the project.
 We think this is a bad approach. How should someone explain the project,
 if he doesn't even know the project. 
-This is just fustrating for the person, how want to contribute.
+This is just fustrating for the person who wants to contribute.
 See Section PROOFREAF if you want to work on the documentation.
 For the others, start by looking at the STYLEGUID, 
 the CODEBASE and the DEV DOCUMENTATION to get an overview for the project. 
@@ -48,7 +48,7 @@ They are easy to implement and perfect for the beginning.
 A good bug report shouldn’t leave others needing to chase you up for more information. 
 Therefore, we ask you to investigate carefully, 
 collect information and describe the issue in detail in your report.
-We use the Gitea Issue Tracker with to track bugs and errors.
+We use the Gitea Issue Tracker to track bugs and errors.
 Submit your bug report with the BUG ISSUE TEMPLATE.
 It guides you, how to write a proper bug report.
 
@@ -56,11 +56,11 @@ It guides you, how to write a proper bug report.
 As Skui is in its early stages, a lot of functionality is missing.
 You can help requesting features and guide the direction of the
 project by your ideas. Any kind of request brings the
-project foreward and is valuebale.
+project foreward and is valueable.
 
 We use the Gitea Issue Tracker. 
 You can create a Issue with your request or write an email to 
-[kalle.bracht@outlook.de](mailto:kalle.bracht@outlook.de)
+[kalle@skui.eu](mailto:kalle@skui.eu)
 
 **Important:** 
 - Be clear and descriptive with your request
@@ -70,7 +70,7 @@ You can create a Issue with your request or write an email to
 - You can also mention other applications and their approach
 
 ### Proofread Grammar & Spelling
-At the moment the team has no native spaker, 
+At the moment the team has no native speaker, 
 nor grammer / spelling experts.
 Therefore there are a lot of grammar and spelling mistakes 
 in the documentation.
@@ -80,7 +80,7 @@ and welcome :)
 
 ### Give Feedback
 If you have feedback or just want to say something,
-you can write to [kalle.bracht@outlook.de](mailto:kalle.bracht@outlook.de)
+you can write to [kalle@skui.eu](mailto:kalle@skui.eu)
 
 
 
