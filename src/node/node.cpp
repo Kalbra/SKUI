@@ -30,3 +30,13 @@ void Node::config()
 
     qDebug() << "Created Viusal <" << instance_name << ">";
 }
+
+void Node::setPositionHint(QPoint position_hint)
+{
+    if (m_position_hint == position_hint) {
+        return;
+    }
+
+    m_position_hint = position_hint;
+    emit positionHintChanged(position_hint);
+}

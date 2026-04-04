@@ -15,7 +15,7 @@ class NodeEditorScene : public QGraphicsScene
 public:
     explicit NodeEditorScene(QObject *parent = nullptr);
 
-    void addNode(Node *);
+    void addNode(Node *node, QPoint relative_position_hint);
 
     /** @brief Checks if currently a cable gets connected
      * 

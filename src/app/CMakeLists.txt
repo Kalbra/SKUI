@@ -2,6 +2,7 @@ qt_add_executable(skui
     main.cpp
     skui.h skui.cpp
     mainwindow.h mainwindow.cpp mainwindow.ui
+    context_menu.h context_menu.cpp
     document.h document.cpp
     ../../libs/icons.qrc
 )

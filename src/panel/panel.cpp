@@ -11,6 +11,18 @@ Panel::Panel(QWidget *parent)
     m_rubber_band = new QRubberBand(QRubberBand::Rectangle, this);
 }
 
+void Panel::addVisual(Visual *visual)
+{
+    QPoint mapped_position_hint = mapFromGlobal(visual->positionHint());
+    VisualContainer *container = new VisualContainer(this);
+    container->setGeometry(QRect(mapped_position_hint, QSize(100, 100)));
+    container->setNode(visual);
+    QWidget *visual_widget = visual->paintWidget(container);
+    visual->setWidget(visual_widget);
+    visual_widget->show();
+    container->show();
+}
+
 QList<QWidget *> Panel::childIn(QRect section)
 {
     QList<QWidget *> contained_widgets;
@@ -243,11 +255,25 @@ bool Panel::inMouseWiggleTolerance(QSize size)
 
 void Panel::mousePressEvent(QMouseEvent *event)
 {
-    if (m_display_mode == DisplayMode::Edit) {
+    bool edit_mode = m_display_mode == DisplayMode::Edit;
+    bool left_button = event->button() == Qt::LeftButton;
+    bool right_button = event->button() == Qt::RightButton;
+
+    if (edit_mode && left_button) {
         m_origin = event->pos();
         m_rubber_band->setGeometry(QRect(m_origin, QSize(1, 1)));
         m_rubber_band->show();
+        return;
     }
+
+    if (edit_mode && right_button) {
+        VisualContainer *container = qobject_cast<VisualContainer *>(childAt(event->pos()));
+        Node *node = container ? container->node() : nullptr;
+        ContextMenu context_menu(this, node, mapToGlobal(event->pos()));
+        return;
+    }
+
+    QWidget::mousePressEvent(event);
 }
 
 void Panel::mouseMoveEvent(QMouseEvent *event)

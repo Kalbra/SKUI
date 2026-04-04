@@ -1,4 +1,5 @@
 #include "nodeeditor.h"
+#include "../app/context_menu.h"
 
 Q_DECLARE_LOGGING_CATEGORY(ne_view)
 Q_LOGGING_CATEGORY(ne_view, "NE_VIEW")
@@ -21,7 +22,21 @@ NodeEditor::NodeEditor(QWidget *parent)
 
 void NodeEditor::addNode(Node *node)
 {
-    m_scene->addNode(node);
+    QPoint relative_position_hint = mapFromGlobal(node->positionHint());
+    m_scene->addNode(node, relative_position_hint);
+}
+
+// We need to use the items method and cannot use itemAt() because
+// the top level item might be the active cable, because
+// Cabel have a maximum bounding box. This is because they can route "everywhere"
+NodeGraphicsItem *NodeEditor::getTopLevelNode(QPoint pos)
+{
+    for (QGraphicsItem *item : items(pos)) {
+        if (NodeGraphicsItem *node = qgraphicsitem_cast<NodeGraphicsItem *>(item)) {
+            return node;
+        }
+    }
+    return nullptr;
 }
 
 void NodeEditor::mousePressEvent(QMouseEvent *event)
@@ -34,19 +49,20 @@ void NodeEditor::mousePressEvent(QMouseEvent *event)
         if (deselect_others) {
             scene()->clearSelection();
         }
-
-        // We need to use the items method and cannot use itemAt() because
-        // the top level item might be the active cable, because
-        // Cabel have a maximum bounding box. This is because they can route "everywhere"
-        for (QGraphicsItem *item : items(event->pos())) {
-            if (NodeGraphicsItem *node = qgraphicsitem_cast<NodeGraphicsItem *>(item)) {
-                m_dragging = true;
-                m_last_drag_pos = event->pos();
-                node->setSelected(true);
-                return;
-            }
+        if (NodeGraphicsItem *node = getTopLevelNode(event->pos())) {
+            m_dragging = true;
+            m_last_drag_pos = event->pos();
+            node->setSelected(true);
+            return;
         }
         scene()->clearSelection();
+    } else if (event->button() == Qt::RightButton) {
+        const Node *node = nullptr;
+        if (NodeGraphicsItem *node_item = getTopLevelNode(event->pos())) {
+            node = node_item->getNode();
+        }
+        ContextMenu context_menu(this, node, mapToGlobal(event->pos()));
+        return;
     }
 
     event->ignore();

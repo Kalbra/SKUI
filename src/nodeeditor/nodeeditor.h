@@ -6,6 +6,7 @@
 #include <QMouseEvent>
 
 #include "../node/node.h"
+#include "graphicsitems/node_graphicsitem.h"
 #include "nodeeditor_scene.h"
 
 class NodeEditor : public QGraphicsView
@@ -22,9 +23,9 @@ protected:
     void mouseReleaseEvent(QMouseEvent *) override;
 
 private:
-    void selectOrDrag(NodeGraphicsItem *node, QPoint current_pos);
-    NodeEditorScene *m_scene;
+    NodeGraphicsItem *getTopLevelNode(QPoint pos);
 
+    NodeEditorScene *m_scene;
     bool m_dragging = false;
     QPoint m_last_drag_pos;
 };

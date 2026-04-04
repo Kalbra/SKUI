@@ -1,43 +1,39 @@
 #include "document.h"
 
-Document::Document(QObject *parent, Panel *panel, NodeEditor *nodeeditor)
+Q_DECLARE_LOGGING_CATEGORY(document)
+Q_LOGGING_CATEGORY(document, "DOCUMENT")
+
+Document *Document::s_active_document = nullptr;
+
+Document::Document(QObject *parent)
     : QObject{parent}
-    , m_panel(panel)
-    , m_nodeeditor(nodeeditor)
-{}
-
-Document::~Document() {}
-
-QJsonObject Document::save()
 {
-    return QJsonObject();
+    m_panel = new Panel;
+    m_nodeeditor = new NodeEditor;
+    s_active_document = this;
 }
 
-void Document::load(QJsonObject content)
+Document::~Document()
 {
-    return;
+    delete m_panel;
+    delete m_nodeeditor;
 }
 
-void Document::createVisual(VisualType type)
+QList<QString> Document::availableNodes() const
 {
-    if (type == VisualType::Test) {
-        Label *label = new Label(this);
-        label->setPanel(m_panel, QPoint(200, 200));
-        m_nodeeditor->addNode(label);
-    } else if (type == VisualType::Slider) {
-        Slider *slider = new Slider(this);
-        slider->setPanel(m_panel, QPoint(400, 200));
-        m_nodeeditor->addNode(slider);
-    } else if (type == VisualType::SerialSend) {
-        SerialSend *serialsend = new SerialSend(this);
-        serialsend->setPanel(m_panel, QPoint(300, 300));
-        m_nodeeditor->addNode(serialsend);
-    } else if (type == VisualType::LineEdit) {
-        LineEdit *line_edit = new LineEdit(this);
-        line_edit->setPanel(m_panel, QPoint(100, 100));
-        m_nodeeditor->addNode(line_edit);
-    } else if (type == VisualType::TextCombine) {
-        TextCombine *text_combine = new TextCombine(this);
-        m_nodeeditor->addNode(text_combine);
+    return m_node_factories.keys();
+}
+
+void Document::createNode(const QString &name, const QPoint position_hint)
+{
+    if (m_node_factories.contains(name)) {
+        Node *node = m_node_factories[name]();
+        node->setPositionHint(position_hint);
+        m_nodeeditor->addNode(node);
+        if (node->isVisual()) {
+            m_panel->addVisual(static_cast<Visual *>(node));
+        }
+    } else {
+        qWarning() << "No Node factory for name" << name << "found. Could not create node!";
     }
 }

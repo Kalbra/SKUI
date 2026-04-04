@@ -10,13 +10,13 @@ NodeEditorScene::NodeEditorScene(QObject *parent)
     setBackgroundBrush(Qt::white);
 }
 
-void NodeEditorScene::addNode(Node *node)
+void NodeEditorScene::addNode(Node *node, QPoint relative_position_hint)
 {
     m_nodes.append(node);
     m_debug_x = m_debug_x + 200;
     NodeGraphicsItem *node_graphicitem = new NodeGraphicsItem(nullptr, node);
     node_graphicitem->setFlag(QGraphicsItem::ItemIsMovable, true);
-    node_graphicitem->setPos(m_debug_x, 100);
+    node_graphicitem->setPos(relative_position_hint);
     addItem(node_graphicitem);
 }
 

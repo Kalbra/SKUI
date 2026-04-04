@@ -3,22 +3,20 @@
 Q_DECLARE_LOGGING_CATEGORY(visual)
 Q_LOGGING_CATEGORY(visual, "VISUAL")
 
-
 Visual::Visual(QObject *parent)
     : Node(parent)
 {
     qDebug() << this->metaObject()->className();
 }
 
-void Visual::setPanel(QWidget *panel_widget, QPoint position)
+void Visual::setWidget(QWidget *widget)
 {
-    if (panel_widget) {
-        m_visual_container = new VisualContainer(panel_widget);
-        m_visual_container->move(position);
-        m_visual_container->show();
-        m_visual_widget = paintWidget(m_visual_container);
-        m_visual_widget->show();
+    if (m_widget == widget) {
+        return;
     }
+
+    m_widget = widget;
+    emit widgetChanged(widget);
 }
 
 QWidget *Visual::paintWidget(VisualContainer *visual_container)
@@ -29,4 +27,3 @@ QWidget *Visual::paintWidget(VisualContainer *visual_container)
     widget->setStyleSheet("background-color: orange; border: 1px solid gray;");
     return widget;
 }
-
