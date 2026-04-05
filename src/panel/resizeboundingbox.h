@@ -7,7 +7,6 @@
 #include <QPainter>
 #include <QWidget>
 
-
 static const int OUTER_HITBOX_SIZE = 10;
 static const QMargins WIDGET_MARGIN(20, 20, 20, 20);
 static const QMargins CENTER_HITBOX_MARGIN(15, 15, 15, 15);

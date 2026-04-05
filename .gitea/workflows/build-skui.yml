@@ -1,4 +1,4 @@
-name: Build Qt Project
+name: Build Skui
 
 on:
   pull_request:
@@ -8,10 +8,13 @@ jobs:
   build:
     name: Build on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    # Tell pip to ignore the OS lockdown
+    env:
+      PIP_BREAK_SYSTEM_PACKAGES: 1
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest] # insert to os when runners are setup: windows-latest, macos-latest
         qt_version: [6.9.0]
         
     steps:
@@ -20,27 +23,29 @@ jobs:
         with:
           submodules: 'recursive'   # fetch submodules recursively
           fetch-depth: 0            # fetch full history (needed for some submodule workflows)
-
+        
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
           version: ${{ matrix.qt_version }}
+          dir: '${{ gitea.workspace }}/Qt'
           target: desktop
-          # cache: true # Optional: Setup caching for faster builds
-          # modules: 'qtcharts qtwebengine' # Optional: Add specific Qt modules here if needed
+          setup-python: 'false'
+          cache: 'false'
+          modules: 'qtserialport'
 
       - name: Install Linux Dependencies
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential libgl1-mesa-dev ninja-build libxkbcommon-x11-0 libvulkan1
+          sudo apt-get install -y build-essential cmake libgl1-mesa-dev ninja-build libxkbcommon-x11-0 libvulkan1
 
       - name: Configure CMake
         shell: bash
         run: |
-          cmake -S '${{ github.workspace }}' -B '${{ github.workspace }}/src/build' -DCMAKE_BUILD_TYPE=Release
+          cmake -S '${{ gitea.workspace }}' -B '${{ gitea.workspace }}/src/build' -DCMAKE_BUILD_TYPE=Release
 
       - name: Build
         shell: bash
         run: |
-          cmake --build '${{ github.workspace }}/src/build' --config Release
+          cmake --build '${{ gitea.workspace }}/src/build' --config Release
