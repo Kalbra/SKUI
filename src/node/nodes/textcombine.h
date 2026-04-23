@@ -11,7 +11,6 @@ public:
 
 private:
     void valueChanged();
-
 };
 
 #endif // TEXTCOMBINE_H

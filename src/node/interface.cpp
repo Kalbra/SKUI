@@ -35,7 +35,6 @@ bool Interface::routeTo(Interface *target_interface)
     return true; // Success
 }
 
-
 void Interface::update()
 {
     // Output Interfaces recive their update by the node after the value in the variant has changed.

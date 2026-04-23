@@ -69,5 +69,4 @@ void ContextMenu::onDelete()
     }
 
     Document::activeDocument()->deleteNode(m_node);
-   
 }
