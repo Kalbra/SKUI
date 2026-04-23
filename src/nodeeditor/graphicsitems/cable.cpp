@@ -8,6 +8,9 @@ Cable::Cable(QGraphicsItem *parent, const Pad *start_pad)
     setAcceptHoverEvents(true);
     setAcceptedMouseButtons(Qt::LeftButton);
 
+    // Delete the cable if the start pad is deleted.
+    connect(m_start_pad, &QObject::destroyed, this, &Cable::deleteLater);
+
     connect(m_start_pad, &Pad::positionChanged, this, &Cable::updateStartCablePosition);
 
     // Init cable
@@ -34,7 +37,6 @@ void Cable::updateStartCablePosition()
         first_segment.end_point.setX(dock_point.x());
         second_segment.start_point = first_segment.end_point;
     }
-
     setEditable(restore_enable);
 
     update();
@@ -62,7 +64,6 @@ void Cable::updateEndCablePosition()
         last_segment.start_point.setX(dock_point.x());
         second_last_segment.end_point = last_segment.start_point;
     }
-
     setEditable(restore_enable);
 
     update();
@@ -119,7 +120,6 @@ void Cable::previewCable(QPoint point)
     }
 
     // Preview Segements are part of the cable segments and counted backwards.
-
     CableSegment &first_preview_segment = m_cable_segments.last();
     CableSegment &second_preview_segment = m_cable_segments[m_cable_segments.size() - 2];
 
@@ -224,6 +224,7 @@ void Cable::mousePressEvent(QGraphicsSceneMouseEvent *event)
         bool is_end_pad = current_pad && current_pad != m_start_pad;
         if (is_end_pad) {
             m_end_pad = current_pad;
+            connect(m_end_pad, &QObject::destroyed, this, &Cable::deleteLater);
             connect(m_end_pad, &Pad::positionChanged, this, &Cable::updateEndCablePosition);
 
             endCorner(m_end_pad->getSceneDockPoint());

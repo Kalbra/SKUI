@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 #include <QGuiApplication>
 #include <QLoggingCategory>
+#include <QPointer>
 
 #include "./graphicsitems/cable.h"
 #include "./graphicsitems/node_graphicsitem.h"
@@ -27,7 +28,7 @@ private:
     int m_debug_x = 0;
     QList<Node *> m_nodes;
     QCursor m_cursor_before_pad;
-    Cable *m_last_cable = nullptr;
+    QPointer<Cable> m_last_cable = nullptr;
 };
 
 #endif // NODEEDITOR_SCENE_H
