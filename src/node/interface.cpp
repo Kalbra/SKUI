@@ -18,13 +18,18 @@ Interface::~Interface()
 
 bool Interface::routeTo(Interface *target_interface)
 {
-    if (m_interface_direction == InterfaceDirection::Input) {
-        return false; // Failed: Routing is done by output interfaces
+    if (target_interface == this) {
+        return false; // Failed: Cant route to itself
     }
-    qDebug() << m_identifier;
-    //if (this->typeId() != target_interface->typeId()) {
-    //    return false; // Failed: Interfaces not same type
-    //}
+
+    if (target_interface->m_interface_direction == m_interface_direction) {
+        return false; // Failed: Cant route to same direction
+    }
+
+    if (m_interface_direction == InterfaceDirection::Input) {
+        // Route the other way around, because the output interface should update the input interface and not the other way around.
+        return target_interface->routeTo(this);
+    }
 
     qDebug() << "Routing from Interface:" << m_identifier
              << "to Interface:" << target_interface->m_identifier;

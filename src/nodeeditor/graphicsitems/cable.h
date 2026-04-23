@@ -116,6 +116,7 @@ private slots:
 private:
     void updateBoundingRect(QRectF new_rect);
     Pad *getPadAtScenePos(const QPointF &scene_pos) const;
+    void initiateConnection(Pad *end_pad);
 
     QList<CableSegment> m_cable_segments;
     const Pad *m_start_pad = nullptr;

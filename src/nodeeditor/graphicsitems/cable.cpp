@@ -184,6 +184,19 @@ Pad *Cable::getPadAtScenePos(const QPointF &scene_pos) const
     return nullptr;
 }
 
+void Cable::initiateConnection(Pad *current_pad)
+{
+    bool connected = m_start_pad->getInterface()->routeTo(current_pad->getInterface());
+    if (connected) {
+        m_end_pad = current_pad;
+        connect(m_end_pad, &QObject::destroyed, this, &Cable::deleteLater);
+        connect(m_end_pad, &Pad::positionChanged, this, &Cable::updateEndCablePosition);
+
+        endCorner(m_end_pad->getSceneDockPoint());
+        setEditable(false);
+    }
+}
+
 void Cable::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     if (m_editable) {
@@ -223,14 +236,7 @@ void Cable::mousePressEvent(QGraphicsSceneMouseEvent *event)
         Pad *current_pad = getPadAtScenePos(event->scenePos());
         bool is_end_pad = current_pad && current_pad != m_start_pad;
         if (is_end_pad) {
-            m_end_pad = current_pad;
-            connect(m_end_pad, &QObject::destroyed, this, &Cable::deleteLater);
-            connect(m_end_pad, &Pad::positionChanged, this, &Cable::updateEndCablePosition);
-
-            endCorner(m_end_pad->getSceneDockPoint());
-            // Connect nodes
-            m_start_pad->getInterface()->routeTo(m_end_pad->getInterface());
-            setEditable(false);
+            initiateConnection(current_pad);
         }
         // Only create a new corner if there is no pad.
         // For starting pad the corner is created at the constructor.
