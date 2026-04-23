@@ -33,14 +33,6 @@ class Cable : public QGraphicsObject
 public:
     explicit Cable(QGraphicsItem *parent, const Pad *start_pad);
 
-    //void abortCable();
-    //deleteCable / ~Cable()
-    //Pad *startPad();
-    //QList<Pad *> endPads();
-    //bool isActive() { return m_is_active; }
-    //getCablePath() -> QList<QPoint> or QList<CableSegment> depending on
-    //dynamic bounding rect, on edit is scene rect or bounding rect of the cable, on finished cable bounding rect
-
     void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
     QRectF boundingRect() const override;
 
@@ -79,7 +71,7 @@ protected:
      * the preview decides if it uses a horizontal or vertical based on
      * the angle to the latest corner. 
      * 
-     * To enter a position, use setCorner(QPoint).
+     * To enter a position, use corner(QPoint).
      * 
      * @param point The position to render the preview, normally the current mouse position.
      * 
