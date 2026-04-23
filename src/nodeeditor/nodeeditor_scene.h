@@ -17,36 +17,17 @@ public:
 
     void addNode(Node *node, QPoint relative_position_hint);
 
-    /** @brief Checks if currently a cable gets connected
-     * 
-     * This method returns weather a cable gets connected at the moment
-     * or if the default behaviour takes place.
-     * The connection state allows the user to route cables.
-     * The best indicatior for this state by a user perspective is,
-     * that the cursor will be overritten to a cross.
-     */
-    inline bool isCableConnectionState() { return m_active_cable; }
-
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *) override;
-    void mouseMoveEvent(QGraphicsSceneMouseEvent *) override;
 
 private:
-    void connectPads(Pad *first, Pad *second);
-    void handleCornerTrigger(QPoint corner_pos);
-    void disableCableConnectionState();
-    void enableCableConnectionState(Pad *);
-    void removePadHoverStates();
     Pad *getPad(QPointF position); // Can be nullptr
     void finishCableConnection(Pad *pad);
 
     int m_debug_x = 0;
     QList<Node *> m_nodes;
     QCursor m_cursor_before_pad;
-
-    // nullptr because there is no initital pad yet
-    Pad *m_initial_pad = nullptr;
-    Cable *m_active_cable = nullptr;
+    Cable *m_last_cable = nullptr;
 };
 
 #endif // NODEEDITOR_SCENE_H

@@ -8,6 +8,14 @@ Interface::Interface(QVariant &&value, InterfaceDirection interface_direction, Q
     qDebug() << m_identifier;
 }
 
+Interface::~Interface()
+{
+    for (Interface *routed_interface : m_routed_interfaces) {
+        // Remove this interface from the routed interfaces of the connected interfaces to avoid dangling pointers.
+        routed_interface->m_routed_interfaces.removeAll(this);
+    }
+}
+
 bool Interface::routeTo(Interface *target_interface)
 {
     if (m_interface_direction == InterfaceDirection::Input) {
@@ -26,6 +34,7 @@ bool Interface::routeTo(Interface *target_interface)
 
     return true; // Success
 }
+
 
 void Interface::update()
 {

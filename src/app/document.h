@@ -73,6 +73,8 @@ public:
      */
     void createNode(const QString &name, const QPoint position_hint = QPoint(0, 0));
 
+    void deleteNode(Node *node);
+
 private:
     const QMap<QString, std::function<Node *()>> m_node_factories
         = {{"Label", [this]() { return new Label(this); }},

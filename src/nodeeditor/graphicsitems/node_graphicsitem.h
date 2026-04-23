@@ -3,6 +3,7 @@
 
 #include <QFontMetrics>
 #include <QGraphicsItem>
+#include <QGraphicsObject>
 #include <QGraphicsSceneHoverEvent>
 #include <QGraphicsSceneMouseEvent>
 #include <QMargins>
@@ -22,8 +23,10 @@ static const int FONT_SIZE = 15; // points
 //static const int PAD_SIZE = 5;
 static const int PAD_SPACING = 20;
 
-class NodeGraphicsItem : public QGraphicsItem
+class NodeGraphicsItem : public QGraphicsObject
 {
+    Q_OBJECT
+
 public:
     static const int Type = QGraphicsItem::UserType + 2;
 
@@ -40,9 +43,10 @@ public:
      * @return Pointer to the node
      * @see Node::Node
      */
-    inline const Node *getNode() { return m_node; }
+    inline Node *getNode() { return m_node; }
 
 private:
+    void onNodeObjectNameChanged(const QString &object_name);
     void drawOuterFrame(QPainter *painter);
     void createPads(QRect frame_geometry);
 
@@ -51,6 +55,7 @@ private:
     QRect m_node_name_geometry;
     QFont m_font;
     QString m_object_name;
+    QList<QMetaObject::Connection> m_node_connections;
 };
 
 #endif // NODE_GRAPHICSITEM_H

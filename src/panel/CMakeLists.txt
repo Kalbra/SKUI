@@ -1,5 +1,4 @@
 qt_add_library(panel STATIC
-    propertywindow.h propertywindow.cpp
     resizeboundingbox.h resizeboundingbox.cpp
     panel.h panel.cpp
     visual_container.h visual_container.cpp

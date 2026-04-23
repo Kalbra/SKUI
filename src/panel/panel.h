@@ -9,7 +9,6 @@
 
 #include "../app/context_menu.h"
 #include "../node/nodes/visual.h"
-#include "propertywindow.h"
 #include "resizeboundingbox.h"
 #include "visual_container.h"
 
@@ -57,15 +56,6 @@ public slots:
     void triggeredAlign(AlignDirection direction);
 
     void changeGeometryForSelected(DragDirection, QPointF);
-
-    /** @brief Spawns a new Propery Window.
-     *
-     * This method spawns a property window for the senders (ResizeBoundingBox) 
-     * paired widget (Visual). If the sender cannot be mapped to a widget the
-     * creation of the Widget is ignored. The PropertyWindow will be created as
-     * a new top level window.
-    */
-    void spawnPropertyWindow();
 
 protected:
     void mousePressEvent(QMouseEvent *) override;

@@ -1,7 +1,7 @@
 #include "pad.h"
 
 Pad::Pad(QGraphicsItem *parent, Interface *interface, PadSide pad_side)
-    : QGraphicsItem{parent}
+    : QGraphicsObject{parent}
     , m_represented_interface(interface)
     , m_pad_side(pad_side)
 {
@@ -9,15 +9,11 @@ Pad::Pad(QGraphicsItem *parent, Interface *interface, PadSide pad_side)
 
     // Enable mouse events for cable connections
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton);
+    // We need this flag to get the position changes of the pad.
+    setFlag(QGraphicsItem::ItemSendsScenePositionChanges, true);
 }
 
-void Pad::setHover(bool hover)
-{
-    m_hover = hover;
-    update();
-}
-
-QPoint Pad::getSceneDockPoint()
+QPoint Pad::getSceneDockPoint() const
 {
     QPoint point;
     int used_pad_size = PAD_SIZE;
@@ -32,6 +28,16 @@ QPoint Pad::getSceneDockPoint()
     }
 
     return mapToScene(point).toPoint();
+}
+
+void Pad::setHover(bool hover)
+{
+    if (m_hover == hover) {
+        return;
+    }
+
+    m_hover = hover;
+    update();
 }
 
 void Pad::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -73,4 +79,23 @@ QRectF Pad::boundingRect() const
                   -(PAD_EXPANDED / 2 + LINE_WIDTH),
                   PAD_EXPANDED + LINE_LENGTH + LINE_WIDTH * 2,
                   PAD_EXPANDED + LINE_WIDTH * 2);
+}
+
+void Pad::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+    setHover(true);
+}
+
+void Pad::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+    setHover(false);
+}
+
+QVariant Pad::itemChange(GraphicsItemChange change, const QVariant &value)
+{
+    if (change == ItemScenePositionHasChanged) {
+        emit positionChanged();
+    }
+
+    return QGraphicsObject::itemChange(change, value);
 }

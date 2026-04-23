@@ -37,3 +37,21 @@ void Document::createNode(const QString &name, const QPoint position_hint)
         qWarning() << "No Node factory for name" << name << "found. Could not create node!";
     }
 }
+
+void Document::deleteNode(Node *node)
+{
+    if (!node) {
+        qWarning() << "Cannot delete node: Node pointer is null.";
+        return;
+    }
+
+    qDebug() << "Deleting node" << node->objectName();
+    // @TODO: Remove node from node editor and panel. This should be done in a better way, maybe by emitting a signal from the node and let the node editor and panel handle the deletion.
+    // The problem is getting the NodeGraphicsItem of the node to remove it and the VisualContainer and the ResizeBoundingBox of the visual node.
+    // Also might remove the visual container
+    node->deleteLater();
+    //m_nodeeditor->removeNode(node);
+    //if (node->isVisual()) {
+    //    m_panel->removeVisual(static_cast<Visual *>(node));
+    //}
+}

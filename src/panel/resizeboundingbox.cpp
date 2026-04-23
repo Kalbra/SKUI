@@ -148,8 +148,6 @@ void ResizeBoundingBox::mousePressEvent(QMouseEvent *event)
         if (active_direction == DragDirection::Center) {
             setCursor(Qt::ClosedHandCursor);
         }
-    } else if (event->buttons() == Qt::RightButton) {
-        emit requestedPropertyWindow();
     }
 }
 

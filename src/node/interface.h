@@ -10,6 +10,7 @@ class Interface : public QVariant
 {
 public:
     Interface(QVariant &&, InterfaceDirection, QString);
+    ~Interface();
 
     QString &getIdentifier() { return m_identifier; };
     const InterfaceDirection &getDirection() const { return m_interface_direction; };
@@ -18,6 +19,7 @@ public:
     void setCallback(std::function<void()> callback);
 
     bool routeTo(Interface *);
+    void unrouteFrom(Interface *);
 
 private:
     void updateRoutedInterfaces();

@@ -12,8 +12,7 @@ class PropertyWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit PropertyWindow(QWidget *parent, QObject *object);
-signals:
+    explicit PropertyWindow(QWidget *parent, const QObject *object);
 };
 
 #endif // PROPERTYWINDOW_H

@@ -1,20 +1,77 @@
 #ifndef CABLE_H
 #define CABLE_H
 
-#include <QGraphicsItem>
+#include <QCursor>
+#include <QGraphicsObject>
+#include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
+#include <QGuiApplication>
 #include <QPainter>
 
+#include "pad.h"
+
 enum class DirectionalPlane { Horizontal, Vertical };
+inline DirectionalPlane &operator!(DirectionalPlane &plane)
+{
+    return plane = plane == DirectionalPlane::Horizontal ? DirectionalPlane::Vertical
+                                                         : DirectionalPlane::Horizontal;
+}
 
 struct CableSegment
-{};
-
-class Cable : public QGraphicsItem
 {
-public:
-    explicit Cable(QGraphicsItem *parent = nullptr, QPoint initial_point = QPoint());
+    DirectionalPlane plane;
+    QPoint start_point;
+    QPoint end_point;
+    // @TODO: Cable segments should also have a next and previous pointers and a mechansim for special
+    // cases like connection split or the end of a cable. This would make it easier to manage the segments and their connections.
+};
 
+class Cable : public QGraphicsObject
+{
+    Q_OBJECT
+
+public:
+    explicit Cable(QGraphicsItem *parent, const Pad *start_pad);
+
+    //void abortCable();
+    //deleteCable / ~Cable()
+    //Pad *startPad();
+    //QList<Pad *> endPads();
+    //bool isActive() { return m_is_active; }
+    //getCablePath() -> QList<QPoint> or QList<CableSegment> depending on
+    //dynamic bounding rect, on edit is scene rect or bounding rect of the cable, on finished cable bounding rect
+
+    void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
+    QRectF boundingRect() const override;
+
+    /** @brief Sets whether the Cable is editable.
+     * 
+     * This method sets wether the Cable is editable. 
+     * If true, the Cable can be edited by the user, meaning that the user can move the corners and connect it to Pads. 
+     * If false, the Cable is fixed and cannot be edited by the user.
+     * 
+     * The default value at construction is true.
+     * 
+     * Note: The bounding rect is the size of the scene in edit mode and will be shrink to the size of the Cable when not editable. 
+     * @param editable Whether the Cable is editable.
+     * 
+     * @see Cable::isEditable()
+     */
+    void setEditable(bool editable);
+
+    /** @brief Returns whether the Cable is editable.
+     * 
+     * This method returns whether the Cable is editable.
+     * If true, the Cable can be edited by the user, meaning that the user can move the corners and connect it to Pads.
+     * If false, the Cable is fixed and cannot be edited by the user.
+     * 
+     * @return Whether the Cable is editable.
+     * 
+     * @see Cable::setEditable(bool editable)
+     */
+    inline bool isEditable() const { return m_editable; }
+
+protected:
     /** @brief Previews the current position of the cable.
      * 
      * This method renders a preview where the cable would be.
@@ -30,39 +87,44 @@ public:
      */
     void previewCable(QPoint point);
 
-    /** @brief Appends a Cable to the given position.
-     * 
-     * This method appends the Cable from the last appended corner to the 
-     * given position.
-     * 
-     * @param point 
-     */
-    void appendCable(QPoint point);
-
     /** @brief Locks a point as a new corner or moves the latest corner.
      * 
      * This method creates a new corner if the point is the oposite
-     * direction. If not the latest corner will move to the 
-     * specified point. See previewCable(QPoint) for more info
-     * about vertical and horizontal cables.
-     * 
-     * @param point The position for the corner to be, normally on a mouse click position.
+     * direction. The point is at the position of the previewed cable.
      * 
      * @see Cable::previewCable(QPoint point)
      */
-    void corner(QPoint point);
+    void corner();
 
-    void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
-    QRectF boundingRect() const override;
+    /** @brief For the last corner before ending the Cable.
+     * 
+     * This method is for calling the last corner at the given point.
+     * 
+     * @param point The position where the cable ends.
+     */
+    void endCorner(QPoint point);
+
+    QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
+    void hoverMoveEvent(QGraphicsSceneHoverEvent *event) override;
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
+    void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
+
+private slots:
+    void updateStartCablePosition();
+    void updateEndCablePosition();
 
 private:
-    const std::pair<QPoint, QPoint> getRestrictedCablePath(const QPoint &start_point,
-                                                           const QPoint &end_point);
-    void switchPlane();
+    void updateBoundingRect(QRectF new_rect);
+    Pad *getPadAtScenePos(const QPointF &scene_pos) const;
 
-    QList<QPoint> m_corner;
-    std::pair<QPoint, QPoint> m_current_preview_points;
-    DirectionalPlane m_current_plane = DirectionalPlane::Horizontal;
+    QList<CableSegment> m_cable_segments;
+    const Pad *m_start_pad = nullptr;
+    Pad *m_end_pad = nullptr;
+    Pad *m_hovered_pad = nullptr;
+    bool m_editable = true;
+    bool m_first_scene = true;
+    // Do not access directly, use updateBoundingRect() to update repaint.
+    QRectF m_bounding_rect;
 };
 
 #endif // CABLE_H

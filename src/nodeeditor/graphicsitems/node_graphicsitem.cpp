@@ -2,7 +2,7 @@
 #include <QGraphicsScene>
 
 NodeGraphicsItem::NodeGraphicsItem(QGraphicsItem *parent, Node *node)
-    : QGraphicsItem{parent}
+    : QGraphicsObject{parent}
     , m_node(node)
 {
     setAcceptHoverEvents(true);
@@ -19,7 +19,42 @@ NodeGraphicsItem::NodeGraphicsItem(QGraphicsItem *parent, Node *node)
     int rect_width = m_node_name_geometry.width() + BOX_WIDTH * 2 + BOX_MARGIN.right() * 2;
     m_frame_geometry = QRect(PAD_SPACING, 0, rect_width, 200);
 
+    m_node_connections.append(connect(m_node, &QObject::destroyed, this, [this]() {
+        scene()->removeItem(this);
+        delete this;
+    }));
+
+    m_node_connections.append(
+        connect(m_node, &QObject::objectNameChanged, this, [this](const QString &object_name) {
+            onNodeObjectNameChanged(object_name);
+        }));
+
     createPads(m_frame_geometry);
+}
+
+void NodeGraphicsItem::onNodeObjectNameChanged(const QString &object_name)
+{
+    if (m_object_name == object_name) {
+        return;
+    }
+
+    prepareGeometryChange();
+
+    m_object_name = object_name;
+    m_node_name_geometry = QFontMetrics(m_font).boundingRect(m_object_name);
+    int rect_width = m_node_name_geometry.width() + BOX_WIDTH * 2 + BOX_MARGIN.right() * 2;
+    m_frame_geometry.setWidth(rect_width);
+
+    const int right_pad_x_pos = m_frame_geometry.right() + BOX_WIDTH * 2;
+    for (QGraphicsItem *item : childItems()) {
+        if (Pad *pad = qgraphicsitem_cast<Pad *>(item)) {
+            if (pad->getSide() == PadSide::Right) {
+                pad->setPos(right_pad_x_pos, pad->pos().y());
+            }
+        }
+    }
+
+    update();
 }
 
 void NodeGraphicsItem::createPads(QRect frame_geometry)

@@ -57,7 +57,6 @@ protected:
 
 signals:
     void changedDelta(DragDirection, QPointF);
-    void requestedPropertyWindow();
 
 private:
     QRect box_geometry;

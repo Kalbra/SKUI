@@ -2,7 +2,7 @@
 #define PAD_H
 
 #include <QCursor>
-#include <QGraphicsItem>
+#include <QGraphicsObject>
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
 
@@ -15,8 +15,10 @@ static const int LINE_LENGTH = 10;
 
 enum class PadSide { Left, Right };
 
-class Pad : public QGraphicsItem
+class Pad : public QGraphicsObject
 {
+    Q_OBJECT
+
 public:
     static const int Type = QGraphicsItem::UserType + 1;
 
@@ -31,7 +33,7 @@ public:
      * 
      * @return Point in scence coordinates
      */
-    QPoint getSceneDockPoint();
+    QPoint getSceneDockPoint() const;
 
     /** @brief Sets the hover state
      * 
@@ -51,6 +53,14 @@ public:
     void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
     QRectF boundingRect() const override;
     int type() const override { return Type; }
+
+signals:
+    void positionChanged();
+
+protected:
+    QVariant itemChange(GraphicsItemChange change, const QVariant &value) override;
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
 
 private:
     bool m_hover = false;

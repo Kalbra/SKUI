@@ -21,6 +21,11 @@ void Panel::addVisual(Visual *visual)
     visual->setWidget(visual_widget);
     visual_widget->show();
     container->show();
+
+    // @TODO: This is a quick and dirty solution to deselect the visual when it is deleted.
+    // This should be done in a better way. Should be done at the rrbw refactor.
+    connect(visual, &QObject::destroyed, this, [this]() { deselectAll(); });
+    connect(visual, &QObject::destroyed, container, &QObject::deleteLater);
 }
 
 QList<QWidget *> Panel::childIn(QRect section)
@@ -123,7 +128,6 @@ void Panel::select(QWidget *child)
     rbb->setBoxGeometry(child->geometry());
     rbb->show();
     connect(rbb, &ResizeBoundingBox::changedDelta, this, &Panel::changeGeometryForSelected);
-    connect(rbb, &ResizeBoundingBox::requestedPropertyWindow, this, &Panel::spawnPropertyWindow);
     m_selection.append({rbb, child});
     //@TODO: Replace with actual name
     qInfo() << QString("Select: IMPLEMENT NAME");
@@ -386,16 +390,4 @@ QMouseEvent *Panel::mapMouseEventToPanel(QMouseEvent *origin_event, QWidget *sou
                                                 origin_event->pointingDevice());
 
     return mapped_event;
-}
-
-void Panel::spawnPropertyWindow()
-{
-    // Find the rbbw pair to get the widget
-    for (const RbbWidgetPair pair : m_selection) {
-        ResizeBoundingBox *rbb = pair.first;
-        if (static_cast<QObject *>(rbb) == sender()) {
-            PropertyWindow *pw = new PropertyWindow(this, pair.second);
-            pw->show();
-        }
-    }
 }

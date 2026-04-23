@@ -57,7 +57,7 @@ void NodeEditor::mousePressEvent(QMouseEvent *event)
         }
         scene()->clearSelection();
     } else if (event->button() == Qt::RightButton) {
-        const Node *node = nullptr;
+        Node *node = nullptr;
         if (NodeGraphicsItem *node_item = getTopLevelNode(event->pos())) {
             node = node_item->getNode();
         }
