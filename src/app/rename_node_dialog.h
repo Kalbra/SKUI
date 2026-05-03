@@ -1,5 +1,4 @@
-#ifndef RENAME_NODE_DIALOG_H
-#define RENAME_NODE_DIALOG_H
+#pragma once
 
 #include <QDialog>
 
@@ -23,5 +22,3 @@ private:
     QLineEdit *m_name_edit = nullptr;
     QDialogButtonBox *m_button_box = nullptr;
 };
-
-#endif // RENAME_NODE_DIALOG_H

@@ -1,5 +1,4 @@
-#ifndef CABLE_H
-#define CABLE_H
+#pragma once
 
 #include <QCursor>
 #include <QGraphicsObject>
@@ -119,5 +118,3 @@ private:
     // Do not access directly, use updateBoundingRect() to update repaint.
     QRectF m_bounding_rect;
 };
-
-#endif // CABLE_H

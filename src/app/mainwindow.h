@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QDir>
 #include <QMainWindow>
@@ -47,4 +46,3 @@ private:
 
     DisplayMode m_display_mode = DisplayMode::Run;
 };
-#endif // MAINWINDOW_H

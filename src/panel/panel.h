@@ -1,5 +1,4 @@
-#ifndef PANEL_H
-#define PANEL_H
+#pragma once
 
 #include <QGuiApplication>
 #include <QLoggingCategory>
@@ -169,5 +168,3 @@ private:
 
     QList<RbbWidgetPair> m_selection;
 };
-
-#endif // PANEL_H

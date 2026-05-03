@@ -1,5 +1,4 @@
-#ifndef TEXTCOMBINE_H
-#define TEXTCOMBINE_H
+#pragma once
 
 #include "../node.h"
 
@@ -12,5 +11,3 @@ public:
 private:
     void valueChanged();
 };
-
-#endif // TEXTCOMBINE_H

@@ -1,5 +1,4 @@
-#ifndef RESIZEBOUNDINGBOX_H
-#define RESIZEBOUNDINGBOX_H
+#pragma once
 
 #include <QCursor>
 #include <QMargins>
@@ -74,5 +73,3 @@ private:
     QPointF last_global_position;
     QRect last_geometry;
 };
-
-#endif // RESIZEBOUNDINGBOX_H

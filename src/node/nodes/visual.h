@@ -1,5 +1,4 @@
-#ifndef VISUAL_H
-#define VISUAL_H
+#pragma once
 
 #include <QLoggingCategory>
 
@@ -72,5 +71,3 @@ signals:
 private:
     QWidget *m_widget = nullptr;
 };
-
-#endif // VISUAL_H
