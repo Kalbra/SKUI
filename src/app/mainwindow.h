@@ -14,12 +14,6 @@ class MainWindow;
 }
 QT_END_NAMESPACE
 
-struct VisualMenuAction
-{
-    QString name;
-    VisualType type;
-};
-
 struct AlignTool
 {
     QString tool_tip;
@@ -35,8 +29,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    Document *focus_document;
-
 protected:
     bool event(QEvent *);
 
@@ -49,11 +41,10 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    Panel *panel;
-
     void loadInsertVisualMenu();
     void loadDebugMenu();
     void loadAlignTools();
-    const QIcon loadIcon(const QString &);
+
+    DisplayMode m_display_mode = DisplayMode::Run;
 };
 #endif // MAINWINDOW_H

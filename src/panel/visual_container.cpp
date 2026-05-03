@@ -19,3 +19,12 @@ void VisualContainer::childEvent(QChildEvent *event)
     }
     QWidget::childEvent(event);
 }
+
+void VisualContainer::setNode(Node *node)
+{
+    if (m_node == node) {
+        return;
+    }
+    m_node = node;
+    emit nodeChanged(node);
+}

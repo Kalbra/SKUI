@@ -11,6 +11,23 @@ Panel::Panel(QWidget *parent)
     m_rubber_band = new QRubberBand(QRubberBand::Rectangle, this);
 }
 
+void Panel::addVisual(Visual *visual)
+{
+    QPoint mapped_position_hint = mapFromGlobal(visual->positionHint());
+    VisualContainer *container = new VisualContainer(this);
+    container->setGeometry(QRect(mapped_position_hint, QSize(100, 100)));
+    container->setNode(visual);
+    QWidget *visual_widget = visual->paintWidget(container);
+    visual->setWidget(visual_widget);
+    visual_widget->show();
+    container->show();
+
+    // @TODO: This is a quick and dirty solution to deselect the visual when it is deleted.
+    // This should be done in a better way. Should be done at the rrbw refactor.
+    connect(visual, &QObject::destroyed, this, [this]() { deselectAll(); });
+    connect(visual, &QObject::destroyed, container, &QObject::deleteLater);
+}
+
 QList<QWidget *> Panel::childIn(QRect section)
 {
     QList<QWidget *> contained_widgets;
@@ -111,7 +128,6 @@ void Panel::select(QWidget *child)
     rbb->setBoxGeometry(child->geometry());
     rbb->show();
     connect(rbb, &ResizeBoundingBox::changedDelta, this, &Panel::changeGeometryForSelected);
-    connect(rbb, &ResizeBoundingBox::requestedPropertyWindow, this, &Panel::spawnPropertyWindow);
     m_selection.append({rbb, child});
     //@TODO: Replace with actual name
     qInfo() << QString("Select: IMPLEMENT NAME");
@@ -243,11 +259,25 @@ bool Panel::inMouseWiggleTolerance(QSize size)
 
 void Panel::mousePressEvent(QMouseEvent *event)
 {
-    if (m_display_mode == DisplayMode::Edit) {
+    bool edit_mode = m_display_mode == DisplayMode::Edit;
+    bool left_button = event->button() == Qt::LeftButton;
+    bool right_button = event->button() == Qt::RightButton;
+
+    if (edit_mode && left_button) {
         m_origin = event->pos();
         m_rubber_band->setGeometry(QRect(m_origin, QSize(1, 1)));
         m_rubber_band->show();
+        return;
     }
+
+    if (edit_mode && right_button) {
+        VisualContainer *container = qobject_cast<VisualContainer *>(childAt(event->pos()));
+        Node *node = container ? container->node() : nullptr;
+        ContextMenu context_menu(this, node, mapToGlobal(event->pos()));
+        return;
+    }
+
+    QWidget::mousePressEvent(event);
 }
 
 void Panel::mouseMoveEvent(QMouseEvent *event)
@@ -360,16 +390,4 @@ QMouseEvent *Panel::mapMouseEventToPanel(QMouseEvent *origin_event, QWidget *sou
                                                 origin_event->pointingDevice());
 
     return mapped_event;
-}
-
-void Panel::spawnPropertyWindow()
-{
-    // Find the rbbw pair to get the widget
-    for (const RbbWidgetPair pair : m_selection) {
-        ResizeBoundingBox *rbb = pair.first;
-        if (static_cast<QObject *>(rbb) == sender()) {
-            PropertyWindow *pw = new PropertyWindow(this, pair.second);
-            pw->show();
-        }
-    }
 }

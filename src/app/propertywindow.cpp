@@ -1,6 +1,6 @@
 #include "propertywindow.h"
 
-PropertyWindow::PropertyWindow(QWidget* parent, QObject* object)
+PropertyWindow::PropertyWindow(QWidget* parent, const QObject* object)
     : QWidget{parent, Qt::Window}
 {
     QVBoxLayout* main_layout = new QVBoxLayout(this);

@@ -12,7 +12,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets SerialPort)
 qt_standard_project_setup()
 
 add_subdirectory(src/app)
@@ -27,7 +27,8 @@ target_link_libraries(skui
         panel
 
         Qt::Core
-        Qt::Widgets 
+        Qt::Widgets
+        Qt6::SerialPort
 )
 
 include(GNUInstallDirs)

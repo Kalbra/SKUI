@@ -7,8 +7,8 @@
 #include <QRubberBand>
 #include <QWidget>
 
+#include "../app/context_menu.h"
 #include "../node/nodes/visual.h"
-#include "propertywindow.h"
 #include "resizeboundingbox.h"
 #include "visual_container.h"
 
@@ -26,6 +26,16 @@ class Panel : public QWidget
 public:
     explicit Panel(QWidget *parent = nullptr);
 
+    /** @brief Adds a Visual to the Panel.
+     * 
+     * This method adds the given Visual element to the Panel.
+     * By doing so, it also creates a VisualContainer for the Visual and sets the Visual's parent to the container.
+     * 
+     * @param visual The Visual element to be added.
+     * @see Visual
+     */
+    void addVisual(Visual *visual);
+
 public slots:
     /** @brief Sets the display mode of the panel.
      * 
@@ -36,6 +46,7 @@ public slots:
      * @param display_mode The desired display mode (Run or Edit).
     */
     void setMode(DisplayMode display_mode);
+
     /** @brief Align selected to direction.
      * 
      * This method aligns selected children and aligns them to a direction. 
@@ -45,15 +56,6 @@ public slots:
     void triggeredAlign(AlignDirection direction);
 
     void changeGeometryForSelected(DragDirection, QPointF);
-
-    /** @brief Spawns a new Propery Window.
-     *
-     * This method spawns a property window for the senders (ResizeBoundingBox) 
-     * paired widget (Visual). If the sender cannot be mapped to a widget the
-     * creation of the Widget is ignored. The PropertyWindow will be created as
-     * a new top level window.
-    */
-    void spawnPropertyWindow();
 
 protected:
     void mousePressEvent(QMouseEvent *) override;

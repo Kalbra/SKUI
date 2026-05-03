@@ -1,9 +1,13 @@
-#ifndef NodeEditorScene_H
-#define NodeEditorScene_H
+#ifndef NODEEDITOR_SCENE_H
+#define NODEEDITOR_SCENE_H
 
 #include <QGraphicsScene>
+#include <QGuiApplication>
+#include <QLoggingCategory>
+#include <QPointer>
 
-#include "node_graphicsitem.h"
+#include "./graphicsitems/cable.h"
+#include "./graphicsitems/node_graphicsitem.h"
 
 class NodeEditorScene : public QGraphicsScene
 {
@@ -12,13 +16,19 @@ class NodeEditorScene : public QGraphicsScene
 public:
     explicit NodeEditorScene(QObject *parent = nullptr);
 
-    void addNode(Node *);
+    void addNode(Node *node, QPoint relative_position_hint);
+
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *) override;
 
 private:
-    void createNodeGraphicsItem(Node *);
+    Pad *getPad(QPointF position); // Can be nullptr
+    void finishCableConnection(Pad *pad);
 
+    int m_debug_x = 0;
     QList<Node *> m_nodes;
-    int m_debug_x;
+    QCursor m_cursor_before_pad;
+    QPointer<Cable> m_last_cable = nullptr;
 };
 
-#endif // NodeEditorScene_H
+#endif // NODEEDITOR_SCENE_H

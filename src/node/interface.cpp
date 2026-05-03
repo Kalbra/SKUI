@@ -1,20 +1,34 @@
 #include "interface.h"
 
-Interface::Interface(QVariant &&value,
-                     InterfaceDirection interface_direction,
-                     const QString &identifier)
+Interface::Interface(QVariant &&value, InterfaceDirection interface_direction, QString identifier)
     : QVariant(value)
     , m_interface_direction(interface_direction)
     , m_identifier(identifier)
-{}
+{
+    qDebug() << m_identifier;
+}
+
+Interface::~Interface()
+{
+    for (Interface *routed_interface : m_routed_interfaces) {
+        // Remove this interface from the routed interfaces of the connected interfaces to avoid dangling pointers.
+        routed_interface->m_routed_interfaces.removeAll(this);
+    }
+}
 
 bool Interface::routeTo(Interface *target_interface)
 {
-    if (m_interface_direction == InterfaceDirection::Input) {
-        return false; // Failed: Routing is done by output interfaces
+    if (target_interface == this) {
+        return false; // Failed: Cant route to itself
     }
-    if (this->typeId() != target_interface->typeId()) {
-        return false; // Failed: Interfaces not same type
+
+    if (target_interface->m_interface_direction == m_interface_direction) {
+        return false; // Failed: Cant route to same direction
+    }
+
+    if (m_interface_direction == InterfaceDirection::Input) {
+        // Route the other way around, because the output interface should update the input interface and not the other way around.
+        return target_interface->routeTo(this);
     }
 
     qDebug() << "Routing from Interface:" << m_identifier
@@ -42,8 +56,8 @@ void Interface::update()
 void Interface::updateRoutedInterfaces()
 {
     for (Interface *routed_interface : m_routed_interfaces) {
-        routed_interface->update();
         routed_interface->setValue(*static_cast<QVariant *>(this));
+        routed_interface->update();
     }
 }
 
