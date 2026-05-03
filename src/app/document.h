@@ -20,7 +20,7 @@
  * The Document class also provides methods to create visual nodes and access the available node types.
  * There is always one active document in the application, which can be accessed via the static method activeDocument().
  */
-class Document : QObject
+class Document : public QObject
 {
     Q_OBJECT
 
@@ -76,12 +76,20 @@ public:
     void deleteNode(Node *node);
 
 private:
+    template<typename NodeType, typename Parent>
+    std::function<Node *()> createNodeFactory(Parent *parent)
+    {
+        return [parent]() -> Node * { return new NodeType(parent); };
+    }
+
     const QMap<QString, std::function<Node *()>> m_node_factories
-        = {{"Label", [this]() { return new Label(this); }},
-           {"Slider", [this]() { return new Slider(this); }},
-           {"SerialSend", [this]() { return new SerialSend(this); }},
-           {"LineEdit", [this]() { return new LineEdit(this); }},
-           {"TextCombine", [this]() { return new TextCombine(this); }}};
+        = {{"Label",       createNodeFactory<Label>(this)},
+           {"LineEdit",    createNodeFactory<LineEdit>(this)},
+           {"TextCombine", createNodeFactory<TextCombine>(this)},
+           {"Slider",      createNodeFactory<Slider>(this)},
+           {"SerialSend",  createNodeFactory<SerialSend>(this)},
+           {"LineEdit",    createNodeFactory<LineEdit>(this)},
+           {"TextCombine", createNodeFactory<TextCombine>(this)}};
 
     Panel *m_panel = nullptr;
     NodeEditor *m_nodeeditor = nullptr;

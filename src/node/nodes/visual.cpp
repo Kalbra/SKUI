@@ -18,12 +18,3 @@ void Visual::setWidget(QWidget *widget)
     m_widget = widget;
     emit widgetChanged(widget);
 }
-
-QWidget *Visual::paintWidget(VisualContainer *visual_container)
-{
-    QWidget *widget = new QWidget(visual_container);
-    widget->setGeometry(50, 50, 150, 100);
-    widget->setAttribute(Qt::WA_StyledBackground, true);
-    widget->setStyleSheet("background-color: orange; border: 1px solid gray;");
-    return widget;
-}

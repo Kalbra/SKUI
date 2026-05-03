@@ -4,7 +4,7 @@ Label::Label(QObject *parent)
     : Visual{parent}
 {
     config();
-    Interface text_interface = Interface(QVariant(0), InterfaceDirection::Input, "text");
+    Interface text_interface = Interface(QVariant(""), InterfaceDirection::Input, "text");
 
     setInterfaces({text_interface});
     getInterface("text")->setCallback([this]() { setText(); });
@@ -24,7 +24,6 @@ void Label::setText()
     Interface *text_interface = getInterface("text");
     if (text_interface && m_label) {
         m_label->clear();
-        qDebug() << "Label changed to" << text_interface->toString();
         m_label->setText(text_interface->toString());
     }
 }

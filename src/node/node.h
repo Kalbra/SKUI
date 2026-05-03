@@ -2,6 +2,7 @@
 #define NODE_H
 
 #include <QHash>
+#include <QMutex>
 #include <QObject>
 #include <QPoint>
 #include <QVariant>
@@ -48,7 +49,7 @@ public:
      * @return True if the node is a visual node, false otherwise.
      * @see Visual
      */
-    const virtual bool isVisual() const { return false; }
+    virtual bool isVisual() const { return false; }
 
     /** @brief Get the position hint
      *
@@ -94,6 +95,7 @@ protected:
 
 private:
     QWidget *m_nodeeditor = nullptr;
+    QMutex m_mutex;
 
     // Properties
     QString m_name = "Undefined";

@@ -12,7 +12,6 @@ LineEdit::LineEdit(QObject *parent)
 QWidget *LineEdit::paintWidget(VisualContainer *visual_container)
 {
     QLineEdit *line_edit = new QLineEdit(visual_container);
-    line_edit->show();
 
     connect(line_edit, &QLineEdit::textChanged, this, &LineEdit::onLineEditValueChanged);
 
@@ -22,10 +21,9 @@ QWidget *LineEdit::paintWidget(VisualContainer *visual_container)
 void LineEdit::onLineEditValueChanged(const QString &value)
 {
     Interface *text_interface = getInterface("text");
-    if (text_interface) {
-        qDebug() << "LineEdit value changed to: " << value;
-        text_interface->setValue(QVariant(value));
 
-        text_interface->update();
-    }
+    Q_ASSERT(text_interface);
+
+    text_interface->setValue(QVariant(value));
+    text_interface->update();
 }

@@ -1,12 +1,12 @@
 #include "interface.h"
 
-Interface::Interface(QVariant &&value, InterfaceDirection interface_direction, QString identifier)
+Interface::Interface(QVariant &&value,
+                     InterfaceDirection interface_direction,
+                     const QString &identifier)
     : QVariant(value)
     , m_interface_direction(interface_direction)
     , m_identifier(identifier)
-{
-    qDebug() << m_identifier;
-}
+{}
 
 Interface::~Interface()
 {
@@ -19,11 +19,19 @@ Interface::~Interface()
 bool Interface::routeTo(Interface *target_interface)
 {
     if (target_interface == this) {
+        qWarning() << "Cannot route interface to itself:" << m_identifier;
         return false; // Failed: Cant route to itself
     }
 
     if (target_interface->m_interface_direction == m_interface_direction) {
+        qWarning() << "Cannot route interface to same direction:" << m_identifier;
         return false; // Failed: Cant route to same direction
+    }
+
+    if (this->typeId() != target_interface->typeId()) {
+        qWarning() << "Cannot route interface to different type(" << this->typeName()
+                   << " != " << target_interface->typeName() << "):" << m_identifier;
+        return false; // Failed: Cant route to different types
     }
 
     if (m_interface_direction == InterfaceDirection::Input) {

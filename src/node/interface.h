@@ -9,10 +9,10 @@ enum class InterfaceDirection { Output, Input };
 class Interface : public QVariant
 {
 public:
-    Interface(QVariant &&, InterfaceDirection, QString);
+    Interface(QVariant &&, InterfaceDirection, const QString &identifier);
     ~Interface();
 
-    QString &getIdentifier() { return m_identifier; };
+    const QString &getIdentifier() { return m_identifier; };
     const InterfaceDirection &getDirection() const { return m_interface_direction; };
 
     void update();

@@ -4,7 +4,7 @@ Slider::Slider(QObject *parent)
     : Visual{parent}
 {
     config();
-    setInterfaces({Interface(QVariant(0), InterfaceDirection::Output, "value")});
+    setInterfaces({Interface(QVariant(""), InterfaceDirection::Output, "value")});
 }
 
 QWidget *Slider::paintWidget(VisualContainer *visual_container)

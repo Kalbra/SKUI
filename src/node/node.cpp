@@ -22,13 +22,15 @@ void Node::config()
     QString class_name = metaObject()->className();
     // Needed because every dirived class should have their own counter.
     // Using only a static counter whould share between the different dirived classes.
+    m_mutex.lock();
     instance_counter[class_name]++;
+    m_mutex.unlock();
 
     // Example: "Label 1"
     QString instance_name = class_name + " " + QString::number(instance_counter[class_name]);
     setObjectName(instance_name);
 
-    qDebug() << "Created Viusal <" << instance_name << ">";
+    qDebug() << "Created Node <" << instance_name << ">";
 }
 
 void Node::setPositionHint(QPoint position_hint)

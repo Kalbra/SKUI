@@ -9,11 +9,11 @@
 class Visual : public Node
 {
     Q_OBJECT
-    Q_PROPERTY(QWidget *widget READ widget WRITE setWidget NOTIFY widgetChanged MEMBER m_widget)
+    Q_PROPERTY(QWidget *widget READ widget WRITE setWidget NOTIFY widgetChanged)
 
 public:
     explicit Visual(QObject *parent = nullptr);
-    virtual ~Visual() {};
+    virtual ~Visual() = default;
 
     /** @brief Gets the widget associated with this visual node.
      * 
@@ -41,7 +41,7 @@ public:
 
     /** @brief Paints the visual node onto a VisualContainer.
      * 
-     * This method creates and returns a QWidget that represents the visual node.
+     * This pure virtual method creates and returns a QWidget that represents the visual node.
      * It is the entry point for rendering content to the panel.
      * The QWidget is a child of the given VisualContainer and is styled to visually represent the node.
      * 
@@ -50,17 +50,16 @@ public:
      * @see Panel
      * @see VisualContainer
      */
-    virtual QWidget *paintWidget(VisualContainer *parent);
+    virtual QWidget *paintWidget(VisualContainer *parent) = 0;
 
-    /**
-     * @brief Checks if the node is a visual node
+    /** @brief Checks if the node is a visual node
      * 
      * This method returns true.
      * 
      * @return True, since this is a visual node.
      * @see Node::isVisual()
      */
-    const bool isVisual() const override { return true; }
+    bool isVisual() const override { return true; }
 
 signals:
     /**

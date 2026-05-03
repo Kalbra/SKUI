@@ -3,6 +3,8 @@
 PropertyWindow::PropertyWindow(QWidget* parent, const QObject* object)
     : QWidget{parent, Qt::Window}
 {
+    setAttribute(Qt::WA_DeleteOnClose);
+
     QVBoxLayout* main_layout = new QVBoxLayout(this);
 
     QScrollArea* scroll_area = new QScrollArea(this);

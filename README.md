@@ -4,7 +4,7 @@
 ![SKUI NodeEditor](/docs/images/SKUI_NodeEditor_Screenshot1.png)
 
 ## Roadmap
-Since SKUI is it's early developing stage the actual application is not usable for production.
+Since SKUI is in it's early developing stage the actual application is not usable for production.
 Therefore the most important thing to look at is the roadmap, where you see the progress and the direction of the project.
 The developing is split up into [milestones](https://dev.skui.eu/SKUI/SKUI/milestones) that include specific task issues.
 A [milestones](https://dev.skui.eu/SKUI/SKUI/milestones) has a rought topic, but might also include issues that aren't
@@ -14,7 +14,7 @@ The current planing considers the following [milestones](https://dev.skui.eu/SKU
 
 ### 1. ~~Jufo Comptition~~
 For the jugend forscht compedition there needs to be a minimal version to show to the judge. 
-It inludes only Nodes and Visuals to send an string via serial connection to stear a servo.
+It includes only Nodes and Visuals to send a string via serial connection to steer a servo.
 
 ### 2. [GUI Phase](https://dev.skui.eu/SKUI/SKUI/milestone/2)
 The GUI phase includes a usable GUI that the User can intuitive use without major bugs.
@@ -54,9 +54,9 @@ SKUI is written in C++ and heavily depends on Qt. It uses CMake as it's build sy
 The following steps help you to compile the application:
 
 ### 1. Installing required toools
-First of all you need a working C++ compiler. We use MSCV 2022 as a compiler, 
+First of all you need a working C++ compiler. We use MSVC 2022 as a compiler, 
 but you can use any that is comatible to Qt and works on your system.
-The easiest way to install MSCV is via Viusal Studio. You can install it by clicking [here](https://visualstudio.microsoft.com/de/downloads/).
+The easiest way to install MSVC is via Viusal Studio. You can install it by clicking [here](https://visualstudio.microsoft.com/downloads/).
 Choose the "Desktop developing with C++" installation kit to be on the safe side.
 
 Next up is Qt, we use version 6.5. To install it use one of Qt's installation methods. 
@@ -83,7 +83,7 @@ cd SKUI
 Now you are good to go to build SKUI yourself.
 
 ### 3. Build SKUI
-⚠️ Under unstruction ⚠️
+⚠️ Under construction ⚠️
 
 ## Contribution
 There are several ways you can help to contribute to the project. 

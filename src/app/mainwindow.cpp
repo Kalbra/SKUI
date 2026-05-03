@@ -12,11 +12,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     setWindowTitle("SKUI");
 
-    QPixmap icon;
-    icon.fill(QColor("#FF1FA9"));
-
-    setWindowIcon(QIcon(icon));
-
     Document *new_document = new Document(this);
     ui->tabWidget->addTab(new_document->panel(), "Panel");
     ui->tabWidget->addTab(new_document->nodeEditor(), "Node Editor");
@@ -28,7 +23,6 @@ MainWindow::MainWindow(QWidget *parent)
     loadAlignTools();
 
     connect(this, &MainWindow::modeChanged, new_document->panel(), &Panel::setMode);
-    //focus_document->createVisual(VisualType::Slider);
 }
 
 MainWindow::~MainWindow()
@@ -44,7 +38,6 @@ void MainWindow::loadInsertVisualMenu()
             Document::activeDocument()->createNode(visual_name, mapToGlobal(QPoint(100, 200)));
             //connect(this, &MainWindow::modeChanged, visual, &Visual::setMode);
         });
-        menu_insert_action->setText(visual_name);
         ui->menuInsertVisual->addAction(menu_insert_action);
     }
 }

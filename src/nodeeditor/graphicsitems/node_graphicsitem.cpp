@@ -6,8 +6,7 @@ NodeGraphicsItem::NodeGraphicsItem(QGraphicsItem *parent, Node *node)
     , m_node(node)
 {
     setAcceptHoverEvents(true);
-    setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemSendsGeometryChanges
-             | QGraphicsItem::ItemIsSelectable);
+    setFlags(QGraphicsItem::ItemIsMovable | QGraphicsItem::ItemIsSelectable);
 
     QFont font = QFont();
     font.setBold(true);

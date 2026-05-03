@@ -1,5 +1,6 @@
 #include "context_menu.h"
 #include "document.h"
+#include "propertywindow.h"
 #include "rename_node_dialog.h"
 
 ContextMenu::ContextMenu(QWidget *parent, Node *node, const QPoint spawn_position)
@@ -24,7 +25,6 @@ ContextMenu::ContextMenu(QWidget *parent, Node *node, const QPoint spawn_positio
     addActions({properties_action, rename_action, delete_action});
 
     QMenu *add_node_menu = addMenu("Add Node");
-    addMenu(add_node_menu);
     loadNodesToMenu(add_node_menu);
 
     exec(m_spawn_position);
@@ -59,7 +59,6 @@ void ContextMenu::onRename()
     }
 
     m_node->setObjectName(rename_dialog.nodeName());
-    //m_node->setProperty("objectName", rename_dialog.nodeName());
 }
 
 void ContextMenu::onDelete()

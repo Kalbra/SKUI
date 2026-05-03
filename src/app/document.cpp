@@ -17,6 +17,7 @@ Document::~Document()
 {
     delete m_panel;
     delete m_nodeeditor;
+    s_active_document = nullptr;
 }
 
 QList<QString> Document::availableNodes() const
@@ -46,12 +47,5 @@ void Document::deleteNode(Node *node)
     }
 
     qDebug() << "Deleting node" << node->objectName();
-    // @TODO: Remove node from node editor and panel. This should be done in a better way, maybe by emitting a signal from the node and let the node editor and panel handle the deletion.
-    // The problem is getting the NodeGraphicsItem of the node to remove it and the VisualContainer and the ResizeBoundingBox of the visual node.
-    // Also might remove the visual container
     node->deleteLater();
-    //m_nodeeditor->removeNode(node);
-    //if (node->isVisual()) {
-    //    m_panel->removeVisual(static_cast<Visual *>(node));
-    //}
 }
