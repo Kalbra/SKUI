@@ -1,8 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QDesktopServices>
 #include <QDir>
 #include <QMainWindow>
+#include <QMessageBox>
 
 #include "document.h"
 #include "nodeeditor.h"
@@ -43,6 +45,7 @@ private:
 
     void loadInsertVisualMenu();
     void loadDebugMenu();
+    void loadAboutMenu();
     void loadAlignTools();
 
     DisplayMode m_display_mode = DisplayMode::Run;

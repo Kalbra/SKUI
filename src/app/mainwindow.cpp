@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     loadInsertVisualMenu();
     loadDebugMenu();
-
+    loadAboutMenu();
     loadAlignTools();
 
     connect(this, &MainWindow::modeChanged, new_document->panel(), &Panel::setMode);
@@ -54,6 +54,41 @@ void MainWindow::loadDebugMenu()
 #ifdef QT_DEBUG
     QMenu *debug_menu = menuBar()->addMenu("Debug");
 #endif
+}
+
+void MainWindow::loadAboutMenu()
+{
+    QMenu *about_menu = menuBar()->addMenu("About");
+
+    about_menu->addAction("Repository", this, [] {
+        QDesktopServices::openUrl(QUrl("https://dev.skui.eu/SKUI/SKUI"));
+    });
+
+    about_menu->addAction("Report a Bug", this, [] {
+        QDesktopServices::openUrl(QUrl("https://dev.skui.eu/SKUI/SKUI/issues/"
+                                       "new?template=.gitea%2fissue_template%2fbug-report.yml"));
+    });
+
+    about_menu->addAction("Wiki", this, [] {
+        QDesktopServices::openUrl(QUrl("https://dev.skui.eu/SKUI/SKUI/wiki"));
+    });
+
+    about_menu->addAction("Contact Mail", this, [] {
+        QDesktopServices::openUrl(QUrl("mailto:info@skui.eu"));
+    });
+
+    about_menu->addAction("License (GPLv3)", this, [] {
+        QDesktopServices::openUrl(QUrl("https://dev.skui.eu/SKUI/SKUI/src/branch/main/LICENSE"));
+    });
+
+    const QString build_commit = QString::fromLatin1(SKUI_BUILD_COMMIT);
+    const QString build_tag = QString::fromLatin1(SKUI_BUILD_TAG);
+    QString info_title = QStringLiteral("Commit (") + build_commit;
+    if (!build_tag.isEmpty()) {
+        info_title += QStringLiteral(", ") + build_tag;
+    }
+    info_title += QLatin1Char(')');
+    about_menu->addAction(info_title);
 }
 
 void MainWindow::loadAlignTools()
