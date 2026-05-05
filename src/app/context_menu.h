@@ -1,5 +1,4 @@
-#ifndef CONTEXT_MENU_H
-#define CONTEXT_MENU_H
+#pragma once
 
 #include <QMenu>
 
@@ -25,5 +24,3 @@ private:
     const QPoint m_spawn_position;
     Node *m_node = nullptr;
 };
-
-#endif // CONTEXT_MENU_H

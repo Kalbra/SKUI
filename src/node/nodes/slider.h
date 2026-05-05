@@ -1,5 +1,4 @@
-#ifndef SLIDER_H
-#define SLIDER_H
+#pragma once
 
 #include <QDebug>
 #include <QSlider>
@@ -18,5 +17,3 @@ private slots:
 private:
     QWidget *paintWidget(VisualContainer *) override;
 };
-
-#endif // SLIDER_H

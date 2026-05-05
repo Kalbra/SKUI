@@ -1,5 +1,4 @@
-#ifndef NodeEditor_H
-#define NodeEditor_H
+#pragma once
 
 #include <QGraphicsView>
 #include <QLoggingCategory>
@@ -29,5 +28,3 @@ private:
     bool m_dragging = false;
     QPoint m_last_drag_pos;
 };
-
-#endif // NodeEditor_H

@@ -1,5 +1,4 @@
-#ifndef DOCUMENT_H
-#define DOCUMENT_H
+#pragma once
 
 #include <functional>
 #include <QJsonObject>
@@ -87,5 +86,3 @@ private:
     NodeEditor *m_nodeeditor = nullptr;
     static Document *s_active_document;
 };
-
-#endif // DOCUMENT_H

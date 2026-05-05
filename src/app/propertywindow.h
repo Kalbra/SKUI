@@ -1,5 +1,4 @@
-#ifndef PROPERTYWINDOW_H
-#define PROPERTYWINDOW_H
+#pragma once
 
 #include <QFormLayout>
 #include <QLabel>
@@ -14,5 +13,3 @@ class PropertyWindow : public QWidget
 public:
     explicit PropertyWindow(QWidget *parent, const QObject *object);
 };
-
-#endif // PROPERTYWINDOW_H

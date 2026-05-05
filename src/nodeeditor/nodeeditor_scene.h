@@ -1,5 +1,4 @@
-#ifndef NODEEDITOR_SCENE_H
-#define NODEEDITOR_SCENE_H
+#pragma once
 
 #include <QGraphicsScene>
 #include <QGuiApplication>
@@ -30,5 +29,3 @@ private:
     QCursor m_cursor_before_pad;
     QPointer<Cable> m_last_cable = nullptr;
 };
-
-#endif // NODEEDITOR_SCENE_H

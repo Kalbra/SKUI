@@ -1,5 +1,4 @@
-#ifndef INTERFACE_H
-#define INTERFACE_H
+#pragma once
 
 #include <QDebug>
 #include <QVariant>
@@ -29,5 +28,3 @@ private:
     QList<Interface *> m_routed_interfaces;
     std::function<void()> m_callback;
 };
-
-#endif // INTERFACE_H

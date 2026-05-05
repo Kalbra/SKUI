@@ -1,5 +1,4 @@
-#ifndef PAD_H
-#define PAD_H
+#pragma once
 
 #include <QCursor>
 #include <QGraphicsObject>
@@ -67,5 +66,3 @@ private:
     const PadSide m_pad_side;
     Interface *m_represented_interface;
 };
-
-#endif // PAD_H

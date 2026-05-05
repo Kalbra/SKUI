@@ -1,5 +1,4 @@
-#ifndef NODE_H
-#define NODE_H
+#pragma once
 
 #include <QHash>
 #include <QObject>
@@ -102,5 +101,3 @@ private:
     QList<Interface> m_interfaces;
     static QMap<QString, int> instance_counter;
 };
-
-#endif // NODE_H

@@ -1,5 +1,4 @@
-#ifndef LABEL_H
-#define LABEL_H
+#pragma once
 
 #include <QLabel>
 
@@ -18,5 +17,3 @@ private:
 
     QLabel *m_label;
 };
-
-#endif // LABEL_H

@@ -1,5 +1,4 @@
-#ifndef SERIALSEND_H
-#define SERIALSEND_H
+#pragma once
 
 #include <QComboBox>
 #include <QLabel>
@@ -22,5 +21,3 @@ private:
     QComboBox *m_combo_box;
     QSerialPort m_serial_port;
 };
-
-#endif // SERIALSEND_H

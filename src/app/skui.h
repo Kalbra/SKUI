@@ -1,5 +1,4 @@
-#ifndef SKUI_H
-#define SKUI_H
+#pragma once
 
 #include <QApplication>
 #include <QDebug>
@@ -12,5 +11,3 @@ public:
 
     bool notify(QObject *, QEvent *) override;
 };
-
-#endif // SKUI_H

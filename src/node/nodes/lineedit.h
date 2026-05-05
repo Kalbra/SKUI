@@ -1,5 +1,4 @@
-#ifndef LINEEDIT_H
-#define LINEEDIT_H
+#pragma once
 
 #include <QLineEdit>
 
@@ -18,5 +17,3 @@ private slots:
 private:
     QWidget *paintWidget(VisualContainer *) override;
 };
-
-#endif // LINEEDIT_H

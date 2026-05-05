@@ -1,5 +1,4 @@
-#ifndef VISUAL_CONTAINER_H
-#define VISUAL_CONTAINER_H
+#pragma once
 
 #include "../node/node.h"
 #include <QChildEvent>
@@ -25,5 +24,3 @@ protected:
 private:
     Node *m_node = nullptr;
 };
-
-#endif // VISUAL_CONTAINER_H

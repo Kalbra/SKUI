@@ -1,5 +1,4 @@
-#ifndef NODE_GRAPHICSITEM_H
-#define NODE_GRAPHICSITEM_H
+#pragma once
 
 #include <QFontMetrics>
 #include <QGraphicsItem>
@@ -57,5 +56,3 @@ private:
     QString m_object_name;
     QList<QMetaObject::Connection> m_node_connections;
 };
-
-#endif // NODE_GRAPHICSITEM_H
