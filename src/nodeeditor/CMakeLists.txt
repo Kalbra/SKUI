@@ -1,9 +1,9 @@
 qt_add_library(nodeeditor STATIC
-    nodeeditor.h nodeeditor.cpp
-    nodeeditor_scene.h nodeeditor_scene.cpp
-    graphicsitems/node_graphicsitem.h graphicsitems/node_graphicsitem.cpp
-    graphicsitems/pad.h graphicsitems/pad.cpp
-    graphicsitems/cable.h graphicsitems/cable.cpp
+    nodeeditor.hpp nodeeditor.cpp
+    nodeeditor_scene.hpp nodeeditor_scene.cpp
+    graphicsitems/node_graphicsitem.hpp graphicsitems/node_graphicsitem.cpp
+    graphicsitems/pad.hpp graphicsitems/pad.cpp
+    graphicsitems/cable.hpp graphicsitems/cable.cpp
 )
 
 target_link_libraries(nodeeditor PRIVATE Qt6::Widgets)
