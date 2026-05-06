@@ -1,4 +1,4 @@
-#include "skui.h"
+#include "skui.hpp"
 
 Skui::Skui(int &argc, char **argv)
     : QApplication(argc, argv)

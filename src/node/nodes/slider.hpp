@@ -3,7 +3,7 @@
 #include <QDebug>
 #include <QSlider>
 
-#include "visual.h"
+#include "visual.hpp"
 
 class Slider : public Visual
 {

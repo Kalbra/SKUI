@@ -1,4 +1,4 @@
-#include "pad.h"
+#include "pad.hpp"
 
 Pad::Pad(QGraphicsItem *parent, Interface *interface, PadSide pad_side)
     : QGraphicsObject{parent}

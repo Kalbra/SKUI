@@ -1,4 +1,4 @@
-#include "label.h"
+#include "label.hpp"
 
 Label::Label(QObject *parent)
     : Visual{parent}

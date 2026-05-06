@@ -1,5 +1,5 @@
-#include "nodeeditor.h"
-#include "../app/context_menu.h"
+#include "nodeeditor.hpp"
+#include "../app/context_menu.hpp"
 
 Q_DECLARE_LOGGING_CATEGORY(ne_view)
 Q_LOGGING_CATEGORY(ne_view, "NE_VIEW")

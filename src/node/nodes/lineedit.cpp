@@ -1,4 +1,4 @@
-#include "lineedit.h"
+#include "lineedit.hpp"
 
 LineEdit::LineEdit(QObject *parent)
     : Visual{parent}

@@ -1,4 +1,4 @@
-#include "node.h"
+#include "node.hpp"
 
 QMap<QString, int> Node::instance_counter;
 

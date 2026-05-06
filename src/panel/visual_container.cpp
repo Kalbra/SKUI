@@ -1,4 +1,4 @@
-#include "visual_container.h"
+#include "visual_container.hpp"
 
 VisualContainer::VisualContainer(QWidget *parent)
     : QWidget{parent}

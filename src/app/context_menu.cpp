@@ -1,6 +1,6 @@
-#include "context_menu.h"
-#include "document.h"
-#include "rename_node_dialog.h"
+#include "context_menu.hpp"
+#include "document.hpp"
+#include "rename_node_dialog.hpp"
 
 ContextMenu::ContextMenu(QWidget *parent, Node *node, const QPoint spawn_position)
     : QMenu{parent}

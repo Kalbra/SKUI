@@ -1,4 +1,4 @@
-#include "serialsend.h"
+#include "serialsend.hpp"
 
 SerialSend::SerialSend(QObject *parent)
     : Visual{parent}

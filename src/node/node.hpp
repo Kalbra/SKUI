@@ -5,7 +5,7 @@
 #include <QPoint>
 #include <QVariant>
 
-#include "interface.h"
+#include "interface.hpp"
 
 class Node : public QObject
 {

@@ -5,7 +5,7 @@
 #include <QSerialPort>
 #include <QSerialPortInfo>
 
-#include "visual.h"
+#include "visual.hpp"
 
 class SerialSend : public Visual
 {

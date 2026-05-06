@@ -1,4 +1,4 @@
-#include "resizeboundingbox.h"
+#include "resizeboundingbox.hpp"
 
 ResizeBoundingBox::ResizeBoundingBox(QWidget *parent)
     : QWidget{parent}

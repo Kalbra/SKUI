@@ -5,7 +5,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
 
-#include "../../node/interface.h"
+#include "../../node/interface.hpp"
 
 static const int LINE_WIDTH = 3;
 static const int PAD_SIZE = 10;

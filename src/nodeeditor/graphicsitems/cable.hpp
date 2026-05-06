@@ -7,7 +7,7 @@
 #include <QGuiApplication>
 #include <QPainter>
 
-#include "pad.h"
+#include "pad.hpp"
 
 enum class DirectionalPlane { Horizontal, Vertical };
 inline DirectionalPlane &operator!(DirectionalPlane &plane)

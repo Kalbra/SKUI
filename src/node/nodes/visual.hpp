@@ -2,8 +2,8 @@
 
 #include <QLoggingCategory>
 
-#include "../../panel/visual_container.h"
-#include "../node.h"
+#include "../../panel/visual_container.hpp"
+#include "../node.hpp"
 
 class Visual : public Node
 {

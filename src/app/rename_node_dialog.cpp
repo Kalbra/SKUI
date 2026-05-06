@@ -1,4 +1,4 @@
-#include "rename_node_dialog.h"
+#include "rename_node_dialog.hpp"
 
 #include <QDialogButtonBox>
 #include <QLabel>

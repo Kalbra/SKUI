@@ -4,9 +4,9 @@
 #include <QLoggingCategory>
 #include <QMouseEvent>
 
-#include "../node/node.h"
-#include "graphicsitems/node_graphicsitem.h"
-#include "nodeeditor_scene.h"
+#include "../node/node.hpp"
+#include "graphicsitems/node_graphicsitem.hpp"
+#include "nodeeditor_scene.hpp"
 
 class NodeEditor : public QGraphicsView
 {
