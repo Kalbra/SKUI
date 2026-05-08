@@ -25,8 +25,17 @@ details about how this project handles them.
     - [Suggest Enhancements, Features or Usecases](#suggest-enhancements-features-or-usecases)
     - [Proofread Grammar & Spelling](#proofread-grammar--spelling)
     - [Give Feedback](#give-feedback)
-- Styleguide
-    - C++
+- Code Styleguide
+    - [C++](#c)
+        - [Automatic Clang checking](#automatic-clang-checking)
+        - [File structure](#file-structure)
+        - [Variables](#variables)
+        - [Member Variables](#member-variables)
+        - [Methods](#methods)
+        - [Nullcheck](#nullcheck)
+        - [Setter/Getter methods](#settergetter-methods)
+        - [Qt's property system](#qts-property-system)
+        - [Marcos](#marcos)
 
 
 ## Ways to Contribute
@@ -87,8 +96,8 @@ you can write to [kalle@skui.eu](mailto:kalle@skui.eu).
 In this section, you will find out how we write good code that meets our standards.
 
 ### C++
-C++ is a language that allows a lot in therms of code style. There are a ton of different approches about how to do what
-and none of them are "the one and only right way". But we will set standards here, not to be right, but to do it the same fachion
+C++ is a language that allows a lot in terms of code style. There are a ton of different approaches about how to do what
+and none of them are "the one and only right way". But we will set standards here, not to be right, but to do it the same fashion
 for the whole project.
 
 #### Automatic Clang checking
@@ -104,7 +113,10 @@ Directorys follow the same convention.
 Every directory should have it's own `CMakeLists.txt`.
 
 #### Variables
-Variable must be precise. Single character variables like `i`, `j`, `a` are permitted in loops if not overused. All variables must be lowercase with `_` as a seperator. Do not specify the type in the variable name. We don't use auto. Do not declare a variable without implementing it:
+Variable must be precise. Single character variables like `i`, `j`, `a` are permitted in loops if not overused.
+All variables must be lowercase with `_` as a seperator.
+Do not specify the type in the variable name.
+Do not declare a variable without initiating it:
 ```c++
 // DON'T
 int a = 10; // Single character
@@ -166,7 +178,7 @@ protected: // Useage of restriced scope
 ...
 ```
 
-**Nullcheck**
+#### Nullcheck
 
 There are two types of pointers as an argument to a method or function.
 The pointer is nullable, because the pointer can logically be null.
@@ -219,7 +231,7 @@ public:
     /** @brief Get the value
     ...
     */
-    inline const int value();
+    inline int value() const;
 ...
 ```
 
