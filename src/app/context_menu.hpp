@@ -2,8 +2,8 @@
 
 #include <QMenu>
 
-#include "../node/node.h"
-#include "propertywindow.h"
+#include "../node/node.hpp"
+#include "propertywindow.hpp"
 
 class ContextMenu : public QMenu
 {

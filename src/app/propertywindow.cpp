@@ -1,4 +1,4 @@
-#include "propertywindow.h"
+#include "propertywindow.hpp"
 
 PropertyWindow::PropertyWindow(QWidget* parent, const QObject* object)
     : QWidget{parent, Qt::Window}

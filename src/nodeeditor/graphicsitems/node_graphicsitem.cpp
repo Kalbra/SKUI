@@ -1,4 +1,4 @@
-#include "node_graphicsitem.h"
+#include "node_graphicsitem.hpp"
 #include <QGraphicsScene>
 
 NodeGraphicsItem::NodeGraphicsItem(QGraphicsItem *parent, Node *node)

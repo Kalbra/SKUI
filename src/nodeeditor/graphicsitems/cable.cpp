@@ -1,5 +1,5 @@
-#include "cable.h"
-#include "pad.h"
+#include "cable.hpp"
+#include "pad.hpp"
 
 Cable::Cable(QGraphicsItem *parent, const Pad *start_pad)
     : QGraphicsObject{parent}

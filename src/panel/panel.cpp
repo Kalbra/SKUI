@@ -1,4 +1,4 @@
-#include "panel.h"
+#include "panel.hpp"
 
 Q_DECLARE_LOGGING_CATEGORY(panel)
 Q_LOGGING_CATEGORY(panel, "PANEL")

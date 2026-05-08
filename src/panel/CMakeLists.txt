@@ -1,7 +1,7 @@
 qt_add_library(panel STATIC
-    resizeboundingbox.h resizeboundingbox.cpp
-    panel.h panel.cpp
-    visual_container.h visual_container.cpp
+    resizeboundingbox.hpp resizeboundingbox.cpp
+    panel.hpp panel.cpp
+    visual_container.hpp visual_container.cpp
 )
 
 target_link_libraries(panel PRIVATE nodeeditor PRIVATE Qt6::Widgets)

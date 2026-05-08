@@ -2,7 +2,7 @@
 
 #include <QLabel>
 
-#include "visual.h"
+#include "visual.hpp"
 
 class Label : public Visual
 {

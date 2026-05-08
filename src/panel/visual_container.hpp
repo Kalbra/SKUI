@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../node/node.h"
 #include <QChildEvent>
 #include <QLayout>
 #include <QWidget>
 
+#include "../node/node.hpp"
 class VisualContainer : public QWidget
 {
     Q_OBJECT

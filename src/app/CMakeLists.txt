@@ -1,11 +1,11 @@
 qt_add_executable(skui 
     main.cpp
-    skui.h skui.cpp
-    mainwindow.h mainwindow.cpp mainwindow.ui
-    context_menu.h context_menu.cpp
-    rename_node_dialog.h rename_node_dialog.cpp
-    propertywindow.h propertywindow.cpp
-    document.h document.cpp
+    skui.hpp skui.cpp
+    mainwindow.hpp mainwindow.cpp mainwindow.ui
+    context_menu.hpp context_menu.cpp
+    rename_node_dialog.hpp rename_node_dialog.cpp
+    propertywindow.hpp propertywindow.cpp
+    document.hpp document.cpp
     ../../libs/icons.qrc
 )
 

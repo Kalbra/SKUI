@@ -1,4 +1,4 @@
-#include "interface.h"
+#include "interface.hpp"
 
 Interface::Interface(QVariant &&value, InterfaceDirection interface_direction, QString identifier)
     : QVariant(value)

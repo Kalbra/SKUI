@@ -1,5 +1,5 @@
-#include "mainwindow.h"
-#include "skui.h"
+#include "mainwindow.hpp"
+#include "skui.hpp"
 
 #include <QApplication>
 

@@ -2,7 +2,7 @@
 
 #include <QLineEdit>
 
-#include "visual.h"
+#include "visual.hpp"
 
 class LineEdit : public Visual
 {

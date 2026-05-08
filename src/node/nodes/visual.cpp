@@ -1,4 +1,4 @@
-#include "visual.h"
+#include "visual.hpp"
 
 Q_DECLARE_LOGGING_CATEGORY(visual)
 Q_LOGGING_CATEGORY(visual, "VISUAL")

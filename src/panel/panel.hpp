@@ -6,10 +6,10 @@
 #include <QRubberBand>
 #include <QWidget>
 
-#include "../app/context_menu.h"
-#include "../node/nodes/visual.h"
-#include "resizeboundingbox.h"
-#include "visual_container.h"
+#include "../app/context_menu.hpp"
+#include "../node/nodes/visual.hpp"
+#include "resizeboundingbox.hpp"
+#include "visual_container.hpp"
 
 enum class AlignDirection { Top, Right, Bottom, Left, Horizontal, Vertical };
 

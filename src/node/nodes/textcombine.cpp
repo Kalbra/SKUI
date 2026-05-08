@@ -1,4 +1,4 @@
-#include "textcombine.h"
+#include "textcombine.hpp"
 
 TextCombine::TextCombine(QObject *parent)
     : Node{parent}

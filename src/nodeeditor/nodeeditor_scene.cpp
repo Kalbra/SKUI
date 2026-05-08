@@ -1,5 +1,5 @@
-#include "nodeeditor_scene.h"
-#include "graphicsitems/pad.h"
+#include "nodeeditor_scene.hpp"
+#include "graphicsitems/pad.hpp"
 
 Q_DECLARE_LOGGING_CATEGORY(ne_scence)
 Q_LOGGING_CATEGORY(ne_scence, "NE_SCENCE")
