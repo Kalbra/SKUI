@@ -25,11 +25,20 @@ details about how this project handles them.
     - [Suggest Enhancements, Features or Usecases](#suggest-enhancements-features-or-usecases)
     - [Proofread Grammar & Spelling](#proofread-grammar--spelling)
     - [Give Feedback](#give-feedback)
-
+- Code Styleguide
+    - [C++](#c)
+        - [Automatic Clang checking](#automatic-clang-checking)
+        - [File structure](#file-structure)
+        - [Variables](#variables)
+        - [Member Variables](#member-variables)
+        - [Methods](#methods)
+        - [Nullcheck](#nullcheck)
+        - [Setter/Getter methods](#settergetter-methods)
+        - [Qt's property system](#qts-property-system)
+        - [Marcos](#marcos)
 
 
 ## Ways to Contribute
-
 
 ### Getting started with writting code
 Most projects suggest to start by editing the documenation to get into the project.
@@ -80,7 +89,164 @@ and welcome :)
 
 ### Give Feedback
 If you have feedback or just want to say something,
-you can write to [kalle@skui.eu](mailto:kalle@skui.eu)
+you can write to [kalle@skui.eu](mailto:kalle@skui.eu).
 
 
+## Code Styleguide
+In this section, you will find out how we write good code that meets our standards.
 
+### C++
+C++ is a language that allows a lot in terms of code style. There are a ton of different approaches about how to do what
+and none of them are "the one and only right way". But we will set standards here, not to be right, but to do it the same fashion
+for the whole project.
+
+#### Automatic Clang checking
+Not all standards are covered here. Some are automaticly ensured by clang.
+The definition can be found at the [`.clang-format`](.clang-format).
+Clang formatting is ensured by a gitea action before merge. 
+But you can also do in manually.
+
+#### File structure
+We use `cpp` and `hpp` file extensions to seperate them clearly from `C`.
+The naming convention is equal to the variables, lowercase and seperated by `_`.
+Directorys follow the same convention. 
+Every directory should have it's own `CMakeLists.txt`.
+
+#### Variables
+Variable must be precise. Single character variables like `i`, `j`, `a` are permitted in loops if not overused.
+All variables must be lowercase with `_` as a seperator.
+Do not specify the type in the variable name.
+Do not declare a variable without initiating it:
+```c++
+// DON'T
+int a = 10; // Single character
+int variable_1 = 420; // Says nothing about the value
+int int_content_page_tab_view_count = 67; // Redundant type, to much information
+auto BoxGeometry = QRect(0, 0, 100, 100); // Usage of auto, written uppercase
+QWidget *tab_view; // No implemenation of variable
+// DO
+int page_count = 67;
+QRect box_geometry = QRect(0, 0, 100, 100); 
+QWidget *tab_view = nullptr;
+```
+
+**Member Variables**
+
+Member variables must start with the prefix `m_`.
+They should be private with a getter/setter method interface:
+
+```c++
+// DON'T
+...
+public:
+    QPoint m_position_hint = QPoint(0, 42); // Member definded in public section, could be used incorrectly
+
+private:
+    bool matches = false; // No m_prefix
+...
+// DO
+...
+private:
+    QPoint m_position_hint = QPoint(0, 42);
+    bool m_matches = false;
+...
+```
+
+#### Methods
+Method names must be presice. Methods names must start low and the words are speperated by a upper character. 
+Methods must have the least scope possible controlled by `private:`, `protected:` and `public:`. 
+Public and protected methods must be documented via Doxygen.
+```c++
+// DON'T
+...
+public:
+    bool m_focus(); // Used member variable styling
+    void addVisual(Visual *visual); // No documenation
+...
+// DO
+...
+protected: // Useage of restriced scope
+    /** @brief Retruns weather the class has focus or not  
+    ...
+    */
+    bool hasFocus();
+
+    /** @brief Adds a Visual to the Panel.
+    ...
+     */
+    void addVisual(Visual *visual);
+...
+```
+
+#### Nullcheck
+
+There are two types of pointers as an argument to a method or function.
+The pointer is nullable, because the pointer can logically be null.
+In this case just use a `if` case:
+```c++
+void MyClass::initSomething(QWidget *widget) 
+{
+    if(widget) {
+        // Do something with it
+    }
+}
+```
+The other case would be, that you have a pointer that should not be null and you might have no logic to handle this case.
+Normally you would use a reference for this. But for QObjects, thats
+not practical, therefore we use `Q_ASSERT` to crash the program carefully:
+```c++
+void MyClass::initSomething(QWidget *requiered_widget)
+{
+    Q_ASSERT(requiered_widget)
+    
+    // Savely access requiered_widget
+}
+```
+One of these methods must be used to check pointers before usage.
+Elsewise it would leed to undefined behaviour with crashing without
+error reporting. 
+
+### Setter/Getter methods
+Because other classes should not access your member variables directly,
+you have to use setter and getter methods. Setters normally look like this: `setValue(int value)`. 
+In contrast for getters you could either use `int getValue()` or `int value()`. We use the second style. An exception from this are boolean
+return type, there we use `bool isValue()`
+Getter methods must be `inline` and `const`. As well as for methods,
+getters and settes as a subset of those need to have documentation.
+```c++
+// DON'T
+...
+public:
+    int value(); // Method is not const and inline. Documentation is missing
+    inline const getValue(); // Method uses get-style
+...
+// DO
+...
+public:
+    /** @brief Set the value
+    ...
+    */
+    void setValue(int value);
+
+    /** @brief Get the value
+    ...
+    */
+    inline int value() const;
+...
+```
+
+### Qt's property system
+Qt has a property system and you should use it if your class is a derivitve of `QObject`.
+
+### Marcos
+Marcos are a powerful tool, they are written uppercase.
+We normally only use conditional macros.
+We do not use macros for constants, but `static const`.
+```c++
+// DON'T
+#define debug_build // Is lowercase
+#define PAD_SIZE 5 // Use const for constants
+// DO
+#define DEBUG_BUILD
+static const int PAD_SIZE = 5;
+```
