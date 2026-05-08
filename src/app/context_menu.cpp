@@ -32,6 +32,8 @@ ContextMenu::ContextMenu(QWidget *parent, Node *node, const QPoint spawn_positio
 
 void ContextMenu::loadNodesToMenu(QMenu *menu)
 {
+    Q_ASSERT(menu);
+
     for (const QString &node_name : Document::activeDocument()->availableNodes()) {
         QAction *node_action = new QAction(node_name, this);
         connect(node_action, &QAction::triggered, this, [this, node_name] {

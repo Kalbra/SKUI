@@ -13,6 +13,8 @@ Panel::Panel(QWidget *parent)
 
 void Panel::addVisual(Visual *visual)
 {
+    Q_ASSERT(visual);
+    
     QPoint mapped_position_hint = mapFromGlobal(visual->positionHint());
     VisualContainer *container = new VisualContainer(this);
     container->setGeometry(QRect(mapped_position_hint, QSize(100, 100)));

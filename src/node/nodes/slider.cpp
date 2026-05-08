@@ -9,6 +9,8 @@ Slider::Slider(QObject *parent)
 
 QWidget *Slider::paintWidget(VisualContainer *visual_container)
 {
+    Q_ASSERT(visual_container);
+    
     //Create a slider in the panel for this node.
     QSlider *slider = new QSlider(visual_container);
     slider->setOrientation(Qt::Horizontal);

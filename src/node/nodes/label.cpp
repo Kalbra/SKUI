@@ -12,6 +12,8 @@ Label::Label(QObject *parent)
 
 QWidget *Label::paintWidget(VisualContainer *visual_container)
 {
+    Q_ASSERT(visual_container);
+    
     // Create a label in the panel for this node.
     m_label = new QLabel("<Label>", visual_container);
     m_label->setGeometry(10, 10, 180, 30);

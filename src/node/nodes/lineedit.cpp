@@ -11,6 +11,8 @@ LineEdit::LineEdit(QObject *parent)
 
 QWidget *LineEdit::paintWidget(VisualContainer *visual_container)
 {
+    Q_ASSERT(visual_container);
+    
     QLineEdit *line_edit = new QLineEdit(visual_container);
     line_edit->show();
 
