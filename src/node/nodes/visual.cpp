@@ -7,7 +7,7 @@ Visual::Visual(QObject *parent)
     : Node(parent)
 {
     qDebug() << this->metaObject()->className();
-} 
+}
 
 void Visual::setWidget(QWidget *widget)
 {
