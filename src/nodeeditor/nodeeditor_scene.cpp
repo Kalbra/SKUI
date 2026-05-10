@@ -13,6 +13,8 @@ NodeEditorScene::NodeEditorScene(QObject *parent)
 
 void NodeEditorScene::addNode(Node *node, QPoint relative_position_hint)
 {
+    Q_ASSERT(node);
+
     m_nodes.append(node);
     m_debug_x = m_debug_x + 200;
     NodeGraphicsItem *node_graphicitem = new NodeGraphicsItem(nullptr, node);

@@ -186,6 +186,8 @@ Pad *Cable::getPadAtScenePos(const QPointF &scene_pos) const
 
 void Cable::initiateConnection(Pad *current_pad)
 {
+    Q_ASSERT(current_pad);
+
     bool connected = m_start_pad->getInterface()->routeTo(current_pad->getInterface());
     if (connected) {
         m_end_pad = current_pad;
