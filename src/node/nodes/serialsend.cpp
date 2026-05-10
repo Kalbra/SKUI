@@ -13,7 +13,7 @@ SerialSend::SerialSend(QObject *parent)
 QWidget *SerialSend::paintWidget(VisualContainer *visual_container)
 {
     Q_ASSERT(visual_container);
-    
+
     m_combo_box = new QComboBox(visual_container);
 
     for (QSerialPortInfo port_info : QSerialPortInfo::availablePorts()) {

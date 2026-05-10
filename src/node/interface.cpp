@@ -19,7 +19,7 @@ Interface::~Interface()
 bool Interface::routeTo(Interface *target_interface)
 {
     Q_ASSERT(target_interface);
-    
+
     if (target_interface == this) {
         return false; // Failed: Cant route to itself
     }

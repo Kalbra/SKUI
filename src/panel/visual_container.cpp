@@ -23,7 +23,7 @@ void VisualContainer::childEvent(QChildEvent *event)
 void VisualContainer::setNode(Node *node)
 {
     Q_ASSERT(node);
-    
+
     if (m_node == node) {
         return;
     }

@@ -23,7 +23,7 @@ NodeEditor::NodeEditor(QWidget *parent)
 void NodeEditor::addNode(Node *node)
 {
     Q_ASSERT(node);
-    
+
     QPoint relative_position_hint = mapFromGlobal(node->positionHint());
     m_scene->addNode(node, relative_position_hint);
 }

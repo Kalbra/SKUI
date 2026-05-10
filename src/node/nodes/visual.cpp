@@ -7,7 +7,7 @@ Visual::Visual(QObject *parent)
     : Node(parent)
 {
     qDebug() << this->metaObject()->className();
-}
+} 
 
 void Visual::setWidget(QWidget *widget)
 {
@@ -24,7 +24,7 @@ void Visual::setWidget(QWidget *widget)
 QWidget *Visual::paintWidget(VisualContainer *visual_container)
 {
     Q_ASSERT(visual_container);
-    
+
     QWidget *widget = new QWidget(visual_container);
     widget->setGeometry(50, 50, 150, 100);
     widget->setAttribute(Qt::WA_StyledBackground, true);
