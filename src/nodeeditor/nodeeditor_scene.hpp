@@ -5,8 +5,8 @@
 #include <QLoggingCategory>
 #include <QPointer>
 
-#include "./graphicsitems/cable.hpp"
-#include "./graphicsitems/node_graphicsitem.hpp"
+#include "nodeeditor/graphicsitems/cable.hpp"
+#include "nodeeditor/graphicsitems/node_graphicsitem.hpp"
 
 class NodeEditorScene : public QGraphicsScene
 {

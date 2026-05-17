@@ -10,7 +10,7 @@
 #include <QPen>
 #include <QPointF>
 
-#include "../../node/node.hpp"
+#include "node/node.hpp"
 #include "pad.hpp"
 
 static const QMargins BOX_MARGIN(7, 7, 7, 7);

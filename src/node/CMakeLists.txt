@@ -10,4 +10,7 @@ qt_add_library(node STATIC
 )
 
 target_link_libraries(node PRIVATE Qt6::Widgets Qt6::SerialPort)
-target_include_directories(node INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(node
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src>
+)

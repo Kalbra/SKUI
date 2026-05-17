@@ -4,8 +4,8 @@
 #include <QLoggingCategory>
 #include <QMouseEvent>
 
-#include "../node/node.hpp"
 #include "graphicsitems/node_graphicsitem.hpp"
+#include "node/node.hpp"
 #include "nodeeditor_scene.hpp"
 
 class NodeEditor : public QGraphicsView

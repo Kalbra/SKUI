@@ -36,6 +36,11 @@ target_compile_definitions(skui PRIVATE
     SKUI_BUILD_TAG="${SKUI_BUILD_TAG}"
 )
 
+target_include_directories(skui
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}/src
+)
+
 target_link_libraries(skui PRIVATE Qt6::Widgets)
 
 set_target_properties(skui PROPERTIES

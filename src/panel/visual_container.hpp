@@ -4,7 +4,7 @@
 #include <QLayout>
 #include <QWidget>
 
-#include "../node/node.hpp"
+#include "node/node.hpp"
 class VisualContainer : public QWidget
 {
     Q_OBJECT

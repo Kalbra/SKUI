@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../node.hpp"
+#include "node/node.hpp"
 
 class TextCombine : public Node
 {
