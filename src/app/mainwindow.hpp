@@ -5,9 +5,9 @@
 #include <QMainWindow>
 #include <QMessageBox>
 
-#include "document.hpp"
-#include "nodeeditor.hpp"
-#include "panel.hpp"
+#include "app/document.hpp"
+#include "nodeeditor/nodeeditor.hpp"
+#include "panel/panel.hpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

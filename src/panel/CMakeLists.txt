@@ -5,4 +5,7 @@ qt_add_library(panel STATIC
 )
 
 target_link_libraries(panel PRIVATE nodeeditor PRIVATE Qt6::Widgets)
-target_include_directories(panel INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(panel
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/src>
+)

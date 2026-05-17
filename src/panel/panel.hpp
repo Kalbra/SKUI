@@ -6,8 +6,8 @@
 #include <QRubberBand>
 #include <QWidget>
 
-#include "../app/context_menu.hpp"
-#include "../node/nodes/visual.hpp"
+#include "app/context_menu.hpp"
+#include "node/nodes/visual.hpp"
 #include "resizeboundingbox.hpp"
 #include "visual_container.hpp"
 

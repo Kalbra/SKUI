@@ -5,13 +5,13 @@
 #include <QLoggingCategory>
 #include <QObject>
 
-#include "nodeeditor.hpp"
-#include "nodes/label.hpp"
-#include "nodes/lineedit.hpp"
-#include "nodes/serialsend.hpp"
-#include "nodes/slider.hpp"
-#include "nodes/textcombine.hpp"
-#include "panel.hpp"
+#include "node/nodes/label.hpp"
+#include "node/nodes/lineedit.hpp"
+#include "node/nodes/serialsend.hpp"
+#include "node/nodes/slider.hpp"
+#include "node/nodes/textcombine.hpp"
+#include "nodeeditor/nodeeditor.hpp"
+#include "panel/panel.hpp"
 
 /** @brief The Document class represents a document in the application.
  *
