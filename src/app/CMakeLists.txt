@@ -9,39 +9,13 @@ qt_add_executable(skui
     ../../libs/icons.qrc
 )
 
-find_package(Git QUIET)
-set(SKUI_BUILD_COMMIT "unknown")
-set(SKUI_BUILD_TAG "")
-
-if(GIT_FOUND)
-    execute_process(
-        COMMAND "${GIT_EXECUTABLE}" rev-parse --short=8 HEAD
-        WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
-        OUTPUT_VARIABLE SKUI_BUILD_COMMIT
-        OUTPUT_STRIP_TRAILING_WHITESPACE
-        ERROR_QUIET
-    )
-
-    execute_process(
-        COMMAND "${GIT_EXECUTABLE}" describe --tags --abbrev=0 HEAD
-        WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
-        OUTPUT_VARIABLE SKUI_BUILD_TAG
-        OUTPUT_STRIP_TRAILING_WHITESPACE
-        ERROR_QUIET
-    )
-endif()
-
-target_compile_definitions(skui PRIVATE
-    SKUI_BUILD_COMMIT="${SKUI_BUILD_COMMIT}"
-    SKUI_BUILD_TAG="${SKUI_BUILD_TAG}"
-)
 
 target_include_directories(skui
     PRIVATE
         ${CMAKE_SOURCE_DIR}/src
 )
 
-target_link_libraries(skui PRIVATE Qt6::Widgets)
+target_link_libraries(skui PRIVATE Qt6::Widgets pybind11::embed)
 
 set_target_properties(skui PROPERTIES
     WIN32_EXECUTABLE OFF
