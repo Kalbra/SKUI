@@ -127,7 +127,7 @@ void MainWindow::on_mode_changed_button_clicked()
         ui->mode_changed_button->setText("Edit Mode");
         qInfo(gui) << "Display mode changed to Run";
     }
-    emit modeChanged(m_display_mode);
+    Q_EMIT modeChanged(m_display_mode);
 }
 
 bool MainWindow::event(QEvent *event)

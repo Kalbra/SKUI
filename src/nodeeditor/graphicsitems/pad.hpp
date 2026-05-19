@@ -53,7 +53,7 @@ public:
     QRectF boundingRect() const override;
     int type() const override { return Type; }
 
-signals:
+Q_SIGNALS:
     void positionChanged();
 
 protected:

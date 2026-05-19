@@ -35,12 +35,14 @@ add_subdirectory(src/app)
 add_subdirectory(src/node)
 add_subdirectory(src/nodeeditor)
 add_subdirectory(src/panel)
+add_subdirectory(src/python)
 
 target_link_libraries(skui
     PRIVATE
         node
         nodeeditor
         panel
+        python
 
         Qt::Core
         Qt::Widgets

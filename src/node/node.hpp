@@ -69,12 +69,13 @@ public:
      */
     void setPositionHint(QPoint position_hint);
 
-signals:
-    /**
+Q_SIGNALS:
+               /**
      * @see getInterface()
      * @see Interface
      */
-    void changedInterfaceValue(const Interface &);
+               void
+               changedInterfaceValue(const Interface &);
 
     /**
      * @see setPositionHint()

@@ -18,7 +18,7 @@ void Visual::setWidget(QWidget *widget)
     }
 
     m_widget = widget;
-    emit widgetChanged(widget);
+    Q_EMIT widgetChanged(widget);
 }
 
 QWidget *Visual::paintWidget(VisualContainer *visual_container)

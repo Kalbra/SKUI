@@ -9,6 +9,7 @@ qt_add_executable(skui
     ../../libs/icons.qrc
 )
 
+target_compile_definitions(skui PRIVATE QT_NO_KEYWORDS)
 
 target_include_directories(skui
     PRIVATE

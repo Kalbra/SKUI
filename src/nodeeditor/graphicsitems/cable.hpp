@@ -100,7 +100,7 @@ protected:
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
     void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 
-private slots:
+private Q_SLOTS:
     void updateStartCablePosition();
     void updateEndCablePosition();
 

@@ -13,7 +13,7 @@ public:
                          Node *node = nullptr,
                          const QPoint spawn_position = QPoint(0, 0));
 
-private slots:
+private Q_SLOTS:
     void onProperties();
     void onRename();
     void onDelete();

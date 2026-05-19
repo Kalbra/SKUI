@@ -14,7 +14,7 @@ public:
     explicit RenameNodeDialog(const QString &current_name, QWidget *parent = nullptr);
     QString nodeName() const;
 
-private slots:
+private Q_SLOTS:
     void validateInput(const QString &text);
 
 private:

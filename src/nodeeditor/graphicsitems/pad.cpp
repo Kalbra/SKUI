@@ -94,7 +94,7 @@ void Pad::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 QVariant Pad::itemChange(GraphicsItemChange change, const QVariant &value)
 {
     if (change == ItemScenePositionHasChanged) {
-        emit positionChanged();
+        Q_EMIT positionChanged();
     }
 
     return QGraphicsObject::itemChange(change, value);

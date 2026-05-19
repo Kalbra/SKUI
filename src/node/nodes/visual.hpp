@@ -61,7 +61,7 @@ public:
      */
     const bool isVisual() const override { return true; }
 
-signals:
+Q_SIGNALS:
     /**
      * @see widget()
      * @see setWidget()

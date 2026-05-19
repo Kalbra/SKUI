@@ -54,7 +54,7 @@ protected:
 
     void paintEvent(QPaintEvent *) override;
 
-signals:
+Q_SIGNALS:
     void changedDelta(DragDirection, QPointF);
 
 private:

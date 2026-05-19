@@ -11,7 +11,7 @@ class Slider : public Visual
 public:
     explicit Slider(QObject *parent = nullptr);
 
-private slots:
+private Q_SLOTS:
     void onSliderValueChanged(int value);
 
 private:

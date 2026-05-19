@@ -38,5 +38,5 @@ void Node::setPositionHint(QPoint position_hint)
     }
 
     m_position_hint = position_hint;
-    emit positionHintChanged(position_hint);
+    Q_EMIT positionHintChanged(position_hint);
 }

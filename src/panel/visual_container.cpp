@@ -28,5 +28,5 @@ void VisualContainer::setNode(Node *node)
         return;
     }
     m_node = node;
-    emit nodeChanged(node);
+    Q_EMIT nodeChanged(node);
 }

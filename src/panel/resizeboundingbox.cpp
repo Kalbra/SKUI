@@ -129,7 +129,7 @@ void ResizeBoundingBox::mouseMoveEvent(QMouseEvent *event)
     if (mouse_pressed) {
         QPointF delta = event->globalPosition() - last_global_position;
         last_global_position = event->globalPosition();
-        emit changedDelta(active_direction, delta);
+        Q_EMIT changedDelta(active_direction, delta);
     }
 
     else { // On hover

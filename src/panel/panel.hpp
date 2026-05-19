@@ -35,7 +35,7 @@ public:
      */
     void addVisual(Visual *visual);
 
-public slots:
+public Q_SLOTS:
     /** @brief Sets the display mode of the panel.
      * 
      * This method changes the display mode of the panel to either Run or Edit.

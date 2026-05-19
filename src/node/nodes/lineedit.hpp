@@ -11,7 +11,7 @@ class LineEdit : public Visual
 public:
     explicit LineEdit(QObject *parent = nullptr);
 
-private slots:
+private Q_SLOTS:
     void onLineEditValueChanged(const QString &value);
 
 private:

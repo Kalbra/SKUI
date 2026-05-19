@@ -33,10 +33,10 @@ public:
 protected:
     bool event(QEvent *);
 
-signals:
+Q_SIGNALS:
     void modeChanged(DisplayMode);
 
-private slots:
+private Q_SLOTS:
     void on_mode_changed_button_clicked();
 
 private:

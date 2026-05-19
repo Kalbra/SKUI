@@ -15,7 +15,7 @@ public:
     Node *node() const { return m_node; }
     void setNode(Node *node);
 
-signals:
+Q_SIGNALS:
     void nodeChanged(Node *node);
 
 protected:
